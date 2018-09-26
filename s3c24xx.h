@@ -6,6 +6,7 @@ void uart_init(void);
 void uart_putc(unsigned char);
 unsigned char uart_getc(void);
 void clock_init(void);
+void show_status(void);
 
 #endif
 

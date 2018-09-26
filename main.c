@@ -38,6 +38,7 @@ int main(void)
 		printf("\n\r*********** haowenchao boot menu ************\n\r");
 		printf("[w] to write test data to nand flash\n\r");
 		printf("[r] to read the data writen in nand flash\n\r");
+		printf("[s] to read the status register of processer\n\r");
 		printf("enter your selection\n\r");
 
 		scanf("%c", &t);
@@ -52,6 +53,11 @@ int main(void)
 		case 'r':
 			read_nand();
 			printf("\n\rfinish read nand flash\n\r");
+		break;
+
+		case 's':
+			show_status();
+			printf("\n\rfinish show status\n\r");
 		break;
 		}
 	}
