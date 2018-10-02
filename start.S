@@ -74,7 +74,7 @@ reset:
 	//init board
 	bl board_init
 
-	ldr sp, =0x30008000
+	ldr sp, =0x34000000
 
 	ldr pc, =main
 
