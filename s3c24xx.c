@@ -96,34 +96,12 @@ char getc(void)
 	return uart_getc();
 }
 
-/*
- * to print current processor mode, stack point and pc value
- */
-void show_status(void)
+void sprint(unsigned int pc, unsigned int lr, unsigned int sp, \
+	unsigned int cpsr)
 {
-	unsigned int v_lr;
-	unsigned int v_pc;
-	unsigned int v_sp;
-	unsigned int v_fp;
-	unsigned int v_cpsr;
-
-	printf("\n\r################## show status ###################\n\r");
-
-	asm(
-		"mov %0, lr\n\t"
-		"mov %1, sp\n\t"
-		"mov %2, pc\n\t"
-		"mov %3, fp\n\t"
-		"mrs %4, cpsr\n\t"
-		:"=r" (v_lr), "=r" (v_sp), "=r" (v_pc), "=r" (v_fp), "=r" (v_cpsr)
-		:
-	);
-
-	printf("lr value is %x\n\r", v_lr);
-	printf("pc value is %x\n\r", v_pc);
-	printf("sp value is %x\n\r", v_sp);
-	printf("fp value is %x\n\r", v_fp);
-	printf("cpsr value is %x\n\r", v_cpsr);
+	printf("\n\rpc value is %0x\n\r", pc);
+	printf("lr value is %0x\n\r", lr);
+	printf("sp value is %0x\n\r", sp);
+	printf("cpsr value is %0x\n\r", cpsr);
 }
-
 
