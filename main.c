@@ -34,11 +34,14 @@ int main(void)
 {
 	char t;
 
+	printf("\n\rsystem starting\n\r");
+
 	while(1) {
 		printf("\n\r*********** haowenchao boot menu ************\n\r");
 		printf("[w] to write test data to nand flash\n\r");
 		printf("[r] to read the data writen in nand flash\n\r");
 		printf("[s] to read the status register of processer\n\r");
+		printf("[i] to enter the swi mode\n\r");
 		printf("enter your selection\n\r");
 
 		scanf("%c", &t);
@@ -58,6 +61,11 @@ int main(void)
 		case 's':
 			show_status();
 			printf("\n\rfinish show status\n\r");
+		break;
+
+		case 'i':
+			asm("swi 123");
+			printf("\n\rreturn from swi exception\n\r");
 		break;
 		}
 	}

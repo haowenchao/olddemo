@@ -4,6 +4,26 @@
 .text
 .global _start
 _start:
+	b reset
+	ldr pc, halt_loop
+	ldr pc, swi
+
+swi:
+	.word _swi
+
+_swi:
+	stmdb sp!, {r0-r12, lr}
+
+	//set return address
+	ldr lr, =return
+
+	//jump to handler
+	ldr pc, =do_swi
+
+return:
+	ldmia sp!, {r0-r12, pc}^
+
+reset:
 	//set cpu to svc mode
 	mrs	r0, cpsr
 	bic	r0, r0, #0x1f
