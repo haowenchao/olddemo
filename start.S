@@ -15,12 +15,12 @@ _swi:
 	stmdb sp!, {r0-r12, lr}
 
 	//set return address
-	ldr lr, =return
+	ldr lr, =swi_ret
 
 	//jump to handler
 	ldr pc, =do_swi
 
-return:
+swi_ret:
 	ldmia sp!, {r0-r12, pc}^
 
 reset:
