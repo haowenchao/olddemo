@@ -15,6 +15,7 @@ void copy2ram(void)
 
 void board_init(void)
 {
+	swi_table_init();
 	uart_init();
 	sdram_init();
 	nand_init();

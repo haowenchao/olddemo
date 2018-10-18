@@ -1,6 +1,6 @@
 #include "lib/printf.h"
 
-#define NAME_MAX_LENG 20
+#define SWI_ID_PIECES 100 
 
 void def_handler(void *para);
 
@@ -10,11 +10,18 @@ struct swi_desc {
 	void *para;
 };
 
-static struct swi_desc swi_table[] = {
-	{1, def_handler, (void *)&swi_table[0]},
-	{2, def_handler, (void *)&swi_table[1]},
-	{3, def_handler, (void *)&swi_table[2]},
-};
+static struct swi_desc swi_table[SWI_ID_PIECES];
+
+void swi_table_init(void)
+{
+	int i = 0;
+
+	for(i = 0; i < SWI_ID_PIECES; i++) {
+		swi_table[i].id = i;
+		swi_table[i].handler = def_handler;
+		swi_table[i].para = &swi_table[i];
+	}
+}
 
 void do_swi(unsigned int id)
 {
