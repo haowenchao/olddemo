@@ -33,6 +33,7 @@ static void read_nand(void)
 int main(void)
 {
 	char t;
+	int id = 0;
 
 	printf("\n\rsystem starting\n\r");
 
@@ -64,7 +65,27 @@ int main(void)
 		break;
 
 		case 'i':
-			asm("swi 123");
+			printf("\n\rinput swi id\n\r");
+			scanf("%d", &id);
+
+			switch(id)
+			{
+			case 0:
+				asm("swi 0");
+			break;
+
+			case 1:
+				asm("swi 1");
+			break;
+
+			case 2:
+				asm("swi 2");
+			break;
+
+			default:
+				asm("swi 123");
+			break;
+			}
 			printf("\n\rreturn from swi exception\n\r");
 		break;
 		}

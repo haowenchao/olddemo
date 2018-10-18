@@ -14,6 +14,10 @@ swi:
 _swi:
 	stmdb sp!, {r0-r12, lr}
 
+	//get interrupt id
+	ldr r0, [lr, #-4]
+	bic r0, r0, #0xff000000
+
 	//set return address
 	ldr lr, =swi_ret
 
