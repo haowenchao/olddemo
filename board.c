@@ -1,5 +1,6 @@
 #include "s3c24xx.h"
 #include "nand.h"
+#include "swi.h"
 
 void copy2ram(void)
 {
