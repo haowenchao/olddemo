@@ -1,5 +1,13 @@
 #define WTCON 0x53000000
 #define INTMSK 0x4a000008
+#define STACKTOP 0x34000000
+#define FIQ_SIZE 0x100000
+#define IRQ_SIZE 0x100000
+#define SVC_SIZE 0x100000
+#define ABT_SIZE 0x100000
+#define SYS_SIZE 0x100000
+#define UND_SIZE 0x100000
+#define USR_SIZE 0x100000
 
 .text
 .global _start
@@ -78,9 +86,84 @@ reset:
 	//init board
 	bl board_init
 
-	ldr sp, =0x34000000
+	//init stack
+	bl init_stack
 
+	//jump to main
 	ldr pc, =main
+
+/******************* Stack layout ********************/
+//
+//			SVC_stack
+//			   ||
+//			   \/
+//			FIQ_stack
+//			   ||
+//			   \/
+//			IRQ_stack
+//			   ||
+//			   \/
+//			ABT_stack
+//			   ||
+//			   \/
+//			SYS_stack
+//			   ||
+//			   \/
+//			UND_stack
+//			   ||
+//			   \/
+//			Usr_stack
+
+init_stack:
+	//set svc stack
+	ldr sp, =STACKTOP
+	mov r0, sp
+	sub r0, r0, #SVC_SIZE
+
+	//set fiq stack
+	mrs r1, cpsr
+	bic r1, r1, #0x1f
+	orr r1, r1, #0x11
+	msr cpsr_c, r1
+	mov sp, r0
+	sub r0, #FIQ_SIZE
+
+	//set irq stack
+	mrs r1, cpsr
+	bic r1, r1, #0x1f
+	orr r1, r1, #0x12
+	msr cpsr_c, r1
+	mov sp, r0
+	sub r0, #IRQ_SIZE
+
+	//set abt stack
+	mrs r1, cpsr
+	bic r1, r1, #0x1f
+	orr r1, r1, #0x17
+	msr cpsr_c, r1
+	mov sp, r0
+	sub r0, #ABT_SIZE
+
+	//set sys stack
+	mrs r1, cpsr
+	orr r1, r1, #0x1f
+	msr cpsr_c, r1
+	mov sp, r0
+	sub r0, #SYS_SIZE
+
+	//set und stack
+	mrs r1, cpsr
+	bic r1, r1, #0x1f
+	orr r1, r1, #0x1b
+	msr cpsr_c, r1
+	mov sp, r0
+	sub r0, #UND_SIZE
+
+	//set usr stack
+	mrs r1, cpsr
+	bic r1, r1, #0xf
+	msr cpsr_c, r1
+	mov sp, r0
 
 halt_loop:
 	b halt_loop
