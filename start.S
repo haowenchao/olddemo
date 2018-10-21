@@ -89,9 +89,6 @@ reset:
 	//init stack
 	bl init_stack
 
-	//jump to main
-	ldr pc, =main
-
 /******************* Stack layout ********************/
 //
 //			SVC_stack
@@ -164,6 +161,9 @@ init_stack:
 	bic r1, r1, #0xf
 	msr cpsr_c, r1
 	mov sp, r0
+
+	//jump to main
+	ldr pc, =main
 
 halt_loop:
 	b halt_loop
