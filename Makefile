@@ -9,7 +9,7 @@ OBJCOPYFLAGS	:= -O binary -S
 OBJDUMPFLAGS	:= -D -S
 export CC LD CFLAGS
 
-objs := start.o board.o s3c24xx.o main.o nand.o swi.o interrupt.o lib/lib.o
+objs := start.o board.o s3c24xx.o main.o nand.o swi.o interrupt.o exception.o lib/lib.o
 
 all:$(objs)
 	$(LD) $(LDFLAGS) -o jz2440.elf $^

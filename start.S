@@ -12,28 +12,30 @@
 .text
 .global _start
 _start:
+	// exception vector
 	b reset
 	ldr pc, halt_loop
 	ldr pc, swi
+	ldr pc, abort_prefetch
+	ldr pc, abort_data
+	nop
+	ldr pc, irq
+	ldr pc, fiq
 
 swi:
 	.word _swi
 
-_swi:
-	stmdb sp!, {r0-r12, lr}
+abort_prefetch:
+	.word _abort_prefetch
 
-	//get interrupt id
-	ldr r0, [lr, #-4]
-	bic r0, r0, #0xff000000
+abort_data:
+	.word _abort_data
 
-	//set return address
-	ldr lr, =swi_ret
+irq:
+	.word _irq
 
-	//jump to handler
-	ldr pc, =do_swi
-
-swi_ret:
-	ldmia sp!, {r0-r12, pc}^
+fiq:
+	.word _fiq
 
 reset:
 	//set cpu to svc mode
@@ -164,6 +166,69 @@ init_stack:
 
 	//jump to main
 	ldr pc, =main
+
+_swi:
+	stmdb sp!, {r0-r12, lr}
+
+	//get interrupt id
+	ldr r0, [lr, #-4]
+	bic r0, r0, #0xff000000
+
+	//set return address
+	ldr lr, =_swi_irq_fiq_abt_ret
+
+	//jump to handler
+	ldr pc, =do_swi
+
+_abort_prefetch:
+	//save environment
+	sub lr, lr, #4
+	stmdb sp!, {r0-r12, lr}
+
+	//set return address
+	ldr lr, =_swi_irq_fiq_abt_ret
+
+	//jump to handler
+	ldr pc, =do_pabt
+
+_abort_data:
+	//save environment
+	sub lr, lr, #8
+	stmdb sp!, {r0-r12, lr}
+
+	//set return address
+	ldr lr, =_swi_irq_fiq_abt_ret
+
+	//jump to handler
+	ldr pc, =do_dabt
+
+_irq:
+	//save environment
+	sub lr, lr, #4
+	stmdb sp!, {r0-r12, lr}
+
+	//set return address
+	ldr lr, =_swi_irq_fiq_abt_ret
+
+	//jump to handler
+	ldr pc, =do_irq
+
+_fiq:
+	//save environment
+	sub lr, lr, #4
+	stmdb sp!, {r0-r7, lr}
+
+	//set return address
+	ldr lr, =_fiq_ret
+
+	//jump to handler
+	ldr pc, =do_fiq
+
+_swi_irq_fiq_abt_ret:
+	ldmia sp!, {r0-r12, pc}^
+
+_fiq_ret:
+	ldmia sp!, {r0-r7, pc}^
 
 halt_loop:
 	b halt_loop
