@@ -160,7 +160,7 @@ init_stack:
 
 	//set usr stack
 	mrs r1, cpsr
-	bic r1, r1, #0xf
+	bic r1, r1, #0xcf
 	msr cpsr_c, r1
 	mov sp, r0
 
