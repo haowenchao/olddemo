@@ -29,8 +29,11 @@ PHONY:tags
 tags:
 	ctags -R
 	cscope -Rbkq
-
 clean:
+	rm -rf *.o *.bin *.elf *.dis
+	make -C lib clean
+
+distclean:
 	rm -rf *.o *.bin *.elf *.dis cscope* tags
 	make -C lib clean
 
