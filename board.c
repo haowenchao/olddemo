@@ -16,10 +16,10 @@ void copy2ram(void)
 
 void board_init(void)
 {
-	swi_table_init();
 	uart_init();
 	sdram_init();
 	nand_init();
 	copy2ram();
+	swi_table_init();
 }
 
