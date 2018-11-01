@@ -1,6 +1,23 @@
 #include "s3c24xx.h"
 #include "nand.h"
 #include "swi.h"
+#include "interrupt.h"
+
+#define GPFCON (*(volatile unsigned int *)0x56000050)
+#define GPFUP (*(volatile unsigned int *)0x56000058)
+#define INTMSK (*(volatile unsigned int *)0x4a000008)
+#define EINTPEND (*(volatile unsigned int *)0x560000a8)
+
+static void init_keys(void)
+{
+	//gpf0
+	GPFCON &= ~0x3;
+	GPFCON |= 0x2;
+	GPFUP |= 0x1;
+
+	//set interrupt
+	INTMSK &= ~0x1;
+}
 
 void copy2ram(void)
 {
@@ -21,5 +38,7 @@ void board_init(void)
 	nand_init();
 	copy2ram();
 	swi_table_init();
+	irq_init();
+	init_keys();
 }
 
