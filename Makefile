@@ -33,6 +33,8 @@ clean:
 	rm -rf *.o *.bin *.elf *.dis
 	make -C lib clean
 
+install:
+	sudo oflash 0 1 0 0 0 jz2440.bin
 distclean:
 	rm -rf *.o *.bin *.elf *.dis cscope* tags
 	make -C lib clean
