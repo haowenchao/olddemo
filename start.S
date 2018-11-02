@@ -161,10 +161,10 @@ init_stack:
 	mov sp, r0
 	sub r0, #UND_SIZE
 
-	mrs	r0, cpsr
-	bic	r0, r0, #0x1f
-	orr	r0, r0, #0xd3
-	msr	cpsr_c, r0
+	mrs r0, cpsr
+	bic r0, r0, #0xdf
+	orr r0, r0, #0x13
+	msr cpsr_c, r0
 
 	//jump to board init
 	ldr pc, =board_init
