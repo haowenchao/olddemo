@@ -19,9 +19,6 @@ static void def_handler(void *para)
 	struct interrupt_desc *p = (struct interrupt_desc *)para;
 
 	printf("\n\rinterrupt id = %d\n\r", p->offset);
-//	printf("\n\rINTMSK = 0x%x\n\r", INTMSK);
-//	printf("\n\rINTPND = 0x%x\n\r", INTPND);
-//	printf("\n\rSRCPND = 0x%x\n\r", SRCPND);
 }
 
 void irq_init(void)
@@ -49,13 +46,8 @@ void do_irq(void)
 
 	p = &int_tables[offset];
 
-//	printf("\n\rINTMSK = 0x%x\n\r", INTMSK);
-//	printf("\n\rINTPND = 0x%x\n\r", INTPND);
-//	printf("\n\rSRCPND = 0x%x\n\r", SRCPND);
-//	printf("\n\r*********************\n\r");
-
-	INTPND &= ~(1 << offset);
-	SRCPND &= ~(1 << offset);
+	INTPND |= 1 << offset;
+	SRCPND |= 1 << offset;
 
 	p->irq_handler(p->para);
 }
