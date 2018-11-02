@@ -85,8 +85,14 @@ reset:
 	//set stack
 	ldr sp, =4096
 
-	//init board
-	bl board_init
+	//init sdram
+	bl sdram_init
+
+	//init nand
+	bl nand_init
+
+	//copy to ram
+	bl copy2ram
 
 	//init stack
 	bl init_stack
@@ -109,9 +115,6 @@ reset:
 //			   ||
 //			   \/
 //			UND_stack
-//			   ||
-//			   \/
-//			Usr_stack
 
 init_stack:
 	//set svc stack
@@ -158,14 +161,13 @@ init_stack:
 	mov sp, r0
 	sub r0, #UND_SIZE
 
-	//set usr stack
-	mrs r1, cpsr
-	bic r1, r1, #0xcf
-	msr cpsr_c, r1
-	mov sp, r0
+	mrs	r0, cpsr
+	bic	r0, r0, #0x1f
+	orr	r0, r0, #0xd3
+	msr	cpsr_c, r0
 
-	//jump to main
-	ldr pc, =main
+	//jump to board init
+	ldr pc, =board_init
 
 _swi:
 	stmdb sp!, {r0-r12, lr}
