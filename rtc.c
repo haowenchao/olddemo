@@ -45,32 +45,30 @@ void rtc_get(struct time_desc* time)
 {
 	unsigned char val;
 
-	val = RTCCON;
-	val |= 0x1;
+	RTCCON |= (unsigned char)0x01;
 
 	val = BCDSEC;
-	time->sec = val & 0xf + ((val >> 4) & 0x7) * 10;
+	time->sec = (val & 0xf) + (((val >> 4) & 0x7) * 10);
 
 	val = BCDMIN;
-	time->min = val & 0xf + ((val >> 4) & 0x7) * 10;
+	time->min = (val & 0xf) + (((val >> 4) & 0x7) * 10);
 
 	val = BCDHOUR;
-	time->hour = val & 0xf + ((val >> 4) & 0x3) * 10;
+	time->hour = (val & 0xf) + (((val >> 4) & 0x3) * 10);
 
 	val = BCDDATE;
-	time->date = val & 0xf + ((val >> 4) & 0x3) * 10;
+	time->date = (val & 0xf) + (((val >> 4) & 0x3) * 10);
 
 	val = BCDDAY;
 	time->day = val & 0x7;
 
 	val = BCDMON;
-	time->month = val & 0xf + ((val >> 4) & 0x1) * 10;
+	time->month = (val & 0xf) + (((val >> 4) & 0x1) * 10);
 
 	val = BCDYEAR;
 	time->year = val;
 
-	val &= ~0x1;
-	RTCCON = (unsigned char)~0x1;
+	RTCCON &= (unsigned char)~0x1;
 }
 
 void rtc_set(struct time_desc* time)
@@ -85,8 +83,7 @@ void rtc_set(struct time_desc* time)
 		return;
 	}
 
-	val = RTCCON;
-	val |= 0x1;
+	RTCCON |= (unsigned char)0x1;
 
 	val = time->sec % 10 ;
 	val |= (unsigned char)((time->sec / 10) << 4);
@@ -114,8 +111,7 @@ void rtc_set(struct time_desc* time)
 	val = time->year;
 	BCDYEAR = val;
 
-	val &= ~0x1;
-	RTCCON = (unsigned char)~0x1;
+	RTCCON &= (unsigned char)~0x1;
 }
 
 void rtc_enable_alarm(enum alarm source)
