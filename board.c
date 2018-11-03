@@ -3,6 +3,8 @@
 #include "swi.h"
 #include "interrupt.h"
 
+extern void main(void);
+
 #define GPFCON (*(volatile unsigned int *)0x56000050)
 #define GPFUP (*(volatile unsigned int *)0x56000058)
 #define INTMSK (*(volatile unsigned int *)0x4a000008)
