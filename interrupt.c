@@ -76,7 +76,7 @@ int request_irq(unsigned int irq_no, void (*handler)(void *), void *para)
 	p->irq_handler = handler;
 	p->para = para;
 
-	INTMSK |= (1 << irq_no);
+	INTMSK &= ~(1 << irq_no);
 
 	return 0;
 }
