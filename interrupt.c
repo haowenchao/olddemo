@@ -46,8 +46,8 @@ void do_irq(void)
 
 	p = &int_tables[offset];
 
-	INTPND |= 1 << offset;
 	SRCPND |= 1 << offset;
+	INTPND |= 1 << offset;
 
 	p->irq_handler(p->para);
 }
