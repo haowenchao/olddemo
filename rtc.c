@@ -116,14 +116,58 @@ void rtc_set(struct time_desc* time)
 
 void rtc_enable_alarm(enum alarm source)
 {
+	RTCCON |= 0x1;
+
 	RTCALM |= 1 << 6;
 
 	RTCALM |= 1 << source;
+
+	RTCCON &= ~0x1;
 } 
 
 void rtc_disable_alarm(enum alarm source)
 {
 	RTCALM &= ~(1 << source);
+}
+
+void rtc_set_alarm_time(struct time_desc *time)
+{
+	unsigned char val;
+
+	//assert
+	if(time->sec > 60 || time->min > 60 || time->hour > 24 \
+		|| time->day > 7 || time->date > 31 \
+		|| time->month > 12) {
+		printf("\n\rparameters unvalid\n\r");
+		return;
+	}
+
+	RTCCON |= (unsigned char)0x1;
+
+	val = time->sec % 10 ;
+	val |= (unsigned char)((time->sec / 10) << 4);
+	ALMSEC = val;
+
+	val = time->min % 10 ;
+	val |= (unsigned char)((time->min / 10) << 4);
+	ALMMIN = val;
+
+	val = time->hour % 10;
+	val |= (unsigned char)((time->hour / 10) << 4);
+	ALMHOUR = val;
+
+	val = time->date % 10;
+	val |= (unsigned char)((time->date / 10) << 4);
+	ALMDATE = val;
+
+	val = time->month % 10;
+	val |= (unsigned char)((time->month / 10) << 4);
+	ALMMON = val;
+
+	val = time->year;
+	ALMYEAR = val;
+
+	RTCCON &= (unsigned char)~0x1;
 }
 
 int rtc_alarm_valid(enum alarm source)
