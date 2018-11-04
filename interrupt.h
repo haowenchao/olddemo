@@ -68,6 +68,8 @@
 #define MSKEINT0 1<<0
 
 void irq_init(void);
+int request_irq(unsigned int irq_no, void (*handler)(void *), void *para);
+void free_irq(unsigned int irq_no);
 
 #endif
 

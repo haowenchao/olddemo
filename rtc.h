@@ -15,5 +15,13 @@ enum alarm {
 	yearen = 1 << 5,
 };
 
+void rtc_get(struct time_desc* time);
+void rtc_set(struct time_desc* time);
+void rtc_enable_alarm(enum alarm source);
+void rtc_disable_alarm(enum alarm source);
+int rtc_alarm_valid(enum alarm source);
+void rtc_enable_tick(unsigned char period);
+void rtc_disable_tick(void);
+int rtc_tick_valid(void);
 #endif
 
