@@ -1,6 +1,8 @@
 #include "s3c24xx.h"
 #include "lib/printf.h"
 #include "nand.h"
+#include "rtc.h"
+#include "interrupt.h"
 
 static void write_nand(void)
 {
@@ -30,6 +32,36 @@ static void read_nand(void)
 	}
 }
 
+void time(void)
+{
+	struct time_desc time;
+
+	rtc_get(&time);
+	printf("\n\r%d:%d:%d\t", time.year, time.month, time.date);
+	printf("%d:%d:%d\n\r", time.hour, time.min, time.sec);
+}
+
+void set(void)
+{
+	struct time_desc time;
+
+	time.hour = 16;
+	time.min = 25;
+	time.sec = 30;
+
+	time.day = 3;
+	time.date = 2;
+	time.month = 1;
+	time.year = 20;
+
+	rtc_set(&time);
+}
+
+static void tick_handler(void *para)
+{
+	time();
+}
+
 int main(void)
 {
 	char t;
@@ -42,6 +74,10 @@ int main(void)
 		printf("[w] to write test data to nand flash\n\r");
 		printf("[r] to read the data writen in nand flash\n\r");
 		printf("[s] to read the status register of processer\n\r");
+		printf("[p] to print current time\n\r");
+		printf("[m] to set current time\n\r");
+		printf("[c] to enter clock mode\n\r");
+		printf("[e] to exit clock mode\n\r");
 		printf("[i] to enter the swi mode\n\r");
 		printf("enter your selection\n\r");
 
@@ -87,6 +123,24 @@ int main(void)
 			break;
 			}
 			printf("\n\rreturn from swi exception\n\r");
+		break;
+
+		case 'p':
+			time();
+		break;
+
+		case 'm':
+			set();
+		break;
+
+		case 'c':
+			rtc_enable_tick(127);
+			request_irq(8, tick_handler, (void *)0);
+		break;
+
+
+		case 'e':
+			rtc_disable_tick();
 		break;
 		}
 	}
