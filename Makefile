@@ -15,6 +15,7 @@ all:$(objs)
 	$(LD) $(LDFLAGS) -o jz2440.elf $^
 	$(OBJCOPY) $(OBJCOPYFLAGS) jz2440.elf jz2440.bin
 	$(OBJDUMP) $(OBJDUMPFLAGS) jz2440.elf > jz2440.dis
+	rm -rf componment/*.o
 
 %.o:%.c
 	$(CC) $(CFLAGS) -o $@ $^
