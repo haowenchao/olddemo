@@ -1,4 +1,4 @@
-objs := list.o
+objs := list.o init.o
 
 all : $(objs)
 	arm-none-eabi-ld -r -o componment.o $^

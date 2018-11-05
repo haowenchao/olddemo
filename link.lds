@@ -14,6 +14,9 @@ SECTIONS
 	.text	:
 	{
 		*(.text)
+	__init0_start = .;
+		*(init0)
+	__init0_end = .;
 	}
 	__fstart = .;
 	func	:
@@ -21,6 +24,7 @@ SECTIONS
 		*(func)
 	}
 	__fend = .;
+
 	.rodata	:	{*(.rodata)}
 	.data	:
 	{

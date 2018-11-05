@@ -1,7 +1,9 @@
 #include "s3c24xx.h"
 #include "nand.h"
 #include "swi.h"
+#include "lib/printf.h"
 #include "interrupt.h"
+#include "componment/init.h"
 
 extern void main(void);
 
@@ -33,6 +35,19 @@ void copy2ram(void)
 	nand_read(desc, 0, len);
 }
 
+#define DEFUNC(func) \
+	static void de_##func(void) { \
+		printf("this is %s\n\r", #func); \
+	} \
+
+DEFUNC(func1);
+DEFUNC(func2);
+DEFUNC(func3);
+
+call_back(de_func1);
+call_back(de_func2);
+call_back(de_func3);
+
 void board_init(void)
 {
 	uart_init();
@@ -40,6 +55,7 @@ void board_init(void)
 	irq_init();
 	init_keys();
 
+	do_callback();
 	main();
 }
 
