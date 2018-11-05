@@ -35,6 +35,7 @@ tags:
 clean:
 	rm -rf *.o *.bin *.elf *.dis
 	make -C lib clean
+	make -C componment clean
 
 install:
 	sudo oflash 0 1 0 0 0 jz2440.bin
