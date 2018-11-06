@@ -4,10 +4,18 @@
 #include "componment/list.h"
 
 typedef void (*task_t)(int argc, char **argv);
+enum task_status {
+	TASK_READY   = 1,
+	TASK_RUN     = 2,
+	TASK_BLOCKED = 3,
+};
 
 struct task_struct{
 	//thread id
 	unsigned int pid;
+
+	//task status
+	enum task_status status;
 
 	//stack
 	void *stack;
