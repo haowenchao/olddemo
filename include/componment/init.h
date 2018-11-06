@@ -8,7 +8,7 @@ struct init_desc {
 };
 
 #define call_back(fun) \
-	__attribute__((section("init0"))) struct init_desc cal_back##fun = {(unsigned int)fun};
+	__attribute__((section("init0"))) struct init_desc cal_back##fun = {(cal_back)fun};
 
 extern void do_callback(void);
 
