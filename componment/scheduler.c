@@ -1,5 +1,6 @@
 #include "componment/list.h"
 #include "componment/init.h"
+#include "componment/thread.h"
 
 static struct list_head ready_list;
 
@@ -24,5 +25,10 @@ void scheduler(void *para)
 void scheduler_start(void)
 {
 
+}
+
+void scheduler_add_ready(struct task_struct *t)
+{
+	list_add(&ready_list, &t->list);
 }
 

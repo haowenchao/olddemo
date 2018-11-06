@@ -1,4 +1,5 @@
 #include "componment/thread.h"
+#include "componment/scheduler.h"
 
 static struct task_struct current;
 
@@ -15,6 +16,10 @@ int task_init(struct task_struct *t, task_t entry, void * stack, unsigned int ss
 
 void task_start(struct task_struct *t)
 {
+	if((void *)0 == t)
+		return;
+
+	scheduler_add_ready(t);
 }
 
 void taks_suspend(struct task_struct *t)
