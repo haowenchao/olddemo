@@ -1,4 +1,4 @@
-objs := list.o init.o
+objs := list.o init.o thread.o scheduler.o
 
 all : $(objs)
 	arm-none-eabi-ld -r -o componment.o $^

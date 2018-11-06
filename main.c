@@ -3,6 +3,7 @@
 #include "nand.h"
 #include "rtc.h"
 #include "interrupt.h"
+#include "componment/scheduler.h"
 
 static void write_nand(void)
 {
@@ -194,6 +195,15 @@ int main(void)
 
 		case 'e':
 			rtc_disable_tick();
+		break;
+
+		case 'u':
+			//set tick
+			rtc_enable_tick(127);
+			request_irq(8, scheduler, (void *)0);
+
+			//start schedule
+			scheduler_start();
 		break;
 		}
 	}
