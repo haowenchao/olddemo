@@ -44,9 +44,9 @@ DEFUNC(func1);
 DEFUNC(func2);
 DEFUNC(func3);
 
-call_back(de_func1);
-call_back(de_func2);
-call_back(de_func3);
+call_back1(de_func1);
+call_back2(de_func2);
+call_back0(de_func3);
 
 void board_init(void)
 {
