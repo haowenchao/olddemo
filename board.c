@@ -22,6 +22,7 @@ static void init_keys(void)
 	//set interrupt
 	INTMSK &= ~0x1;
 }
+call_back0(init_keys);
 
 void copy2ram(void)
 {
@@ -35,27 +36,11 @@ void copy2ram(void)
 	nand_read(desc, 0, len);
 }
 
-#define DEFUNC(func) \
-	static void de_##func(void) { \
-		printf("this is %s\n\r", #func); \
-	} \
-
-DEFUNC(func1);
-DEFUNC(func2);
-DEFUNC(func3);
-
-call_back1(de_func1);
-call_back2(de_func2);
-call_back0(de_func3);
-
 void board_init(void)
 {
-	uart_init();
-	swi_table_init();
-	irq_init();
-	init_keys();
-
 	do_callback();
+
+	//jump to main
 	main();
 }
 

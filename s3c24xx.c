@@ -1,4 +1,5 @@
 #include "lib/printf.h"
+#include "componment/init.h"
 
 /* uart init related macros */
 #define GPHCON		(*(volatile unsigned long *)0x56000070)
@@ -67,6 +68,7 @@ void uart_init(void)
 	//set baud rate
 	UBRDIV0 = 26;
 }
+call_back0(uart_init);
 
 void uart_putc(unsigned char val)
 {

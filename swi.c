@@ -1,4 +1,5 @@
 #include "lib/printf.h"
+#include "componment/init.h"
 
 #define SWI_ID_PIECES 100 
 
@@ -22,6 +23,7 @@ void swi_table_init(void)
 		swi_table[i].para = &swi_table[i];
 	}
 }
+call_back0(swi_table_init);
 
 void do_swi(unsigned int id)
 {

@@ -1,4 +1,5 @@
 #include "lib/printf.h"
+#include "componment/init.h"
 
 #define INTERRUPT_SRC_PIECES 32
 #define INTMSK (*(volatile unsigned int *)0x4a000008)
@@ -31,6 +32,7 @@ void irq_init(void)
 		int_tables[i].para = (void *)&int_tables[i];
 	}
 }
+call_back0(irq_init);
 
 void do_irq(void)
 {
