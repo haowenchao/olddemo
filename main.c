@@ -205,6 +205,14 @@ int main(void)
 			//start schedule
 			scheduler_start();
 		break;
+
+		case 'v':
+			list();
+		break;
+
+		case 'z':
+			add();
+		break;
 		}
 	}
 
