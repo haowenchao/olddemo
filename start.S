@@ -170,7 +170,7 @@ init_stack:
 	ldr pc, =board_init
 
 _swi:
-	stmdb sp!, {r0-r12, lr}
+	stmfd sp!, {r0-r12, lr}
 
 	//get interrupt id
 	ldr r0, [lr, #-4]
@@ -185,7 +185,7 @@ _swi:
 _abort_prefetch:
 	//save environment
 	sub lr, lr, #4
-	stmdb sp!, {r0-r12, lr}
+	stmfd sp!, {r0-r12, lr}
 
 	//set return address
 	ldr lr, =_swi_irq_fiq_abt_ret
@@ -196,7 +196,7 @@ _abort_prefetch:
 _abort_data:
 	//save environment
 	sub lr, lr, #8
-	stmdb sp!, {r0-r12, lr}
+	stmfd sp!, {r0-r12, lr}
 
 	//set return address
 	ldr lr, =_swi_irq_fiq_abt_ret
@@ -207,7 +207,7 @@ _abort_data:
 _irq:
 	//save environment
 	sub lr, lr, #4
-	stmdb sp!, {r0-r12, lr}
+	stmfd sp!, {r0-r12, lr}
 
 	//set return address
 	ldr lr, =_swi_irq_fiq_abt_ret
@@ -218,7 +218,7 @@ _irq:
 _fiq:
 	//save environment
 	sub lr, lr, #4
-	stmdb sp!, {r0-r7, lr}
+	stmfd sp!, {r0-r7, lr}
 
 	//set return address
 	ldr lr, =_fiq_ret
@@ -227,10 +227,10 @@ _fiq:
 	ldr pc, =do_fiq
 
 _swi_irq_fiq_abt_ret:
-	ldmia sp!, {r0-r12, pc}^
+	ldmfd sp!, {r0-r12, pc}^
 
 _fiq_ret:
-	ldmia sp!, {r0-r7, pc}^
+	ldmfd sp!, {r0-r7, pc}^
 
 halt_loop:
 	b halt_loop
