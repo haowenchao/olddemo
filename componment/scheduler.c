@@ -38,7 +38,7 @@ void scheduler(void *para)
 
 	to->entry(1, (void *)0);
 
-	context_switch(from->stack, to->stack);
+	context_switch(&(from->stack), &(to->stack));
 
 	printf("in shceduler, %p\n\r", to);
 }
