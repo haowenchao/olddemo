@@ -3,6 +3,10 @@
 
 extern int printf(const char *fmt, ...);
 
+unsigned int from_stack;
+unsigned int to_stack;
+unsigned int context_switch_flag = 0;
+
 struct task_struct *current;
 
 static unsigned int getpid(void)
@@ -53,16 +57,38 @@ struct task_struct *get_current(void)
 	return current;
 }
 
-void context_switch_to(void *to)
-{
-}
-
 void context_switch(void *from, void *to)
 {
+	from_stack = (unsigned int)from;
+	to_stack = (unsigned int)to;
+	context_switch_flag = 1;
 }
 
 void * stack_init(void *stack, unsigned int ss, task_t task)
 {
+	unsigned int *sp;
+	unsigned char *p = (unsigned char *)stack + ss - 4;
+
+	sp = (unsigned int*)p;
+
+	*--sp = (unsigned int*)task;
+	*--sp = 0;
+	*--sp = 0;
+	*--sp = 0;
+	*--sp = 0;
+	*--sp = 0;
+	*--sp = 0;
+	*--sp = 0;
+	*--sp = 0;
+	*--sp = 0;
+	*--sp = 0;
+	*--sp = 0;
+	*--sp = 0;
+	*--sp = 0;
+	*--sp = 0;
+	*--sp = 0x13;
+
+	return sp;
 }
 
 DECLARE_TASK(t1, 512)
