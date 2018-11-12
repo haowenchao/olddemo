@@ -226,8 +226,51 @@ _fiq:
 	//jump to handler
 	ldr pc, =do_fiq
 
+.global from_stack
+.global to_stack
+.global context_switch_flag
 _swi_irq_fiq_abt_ret:
+	ldr r0, =context_switch_flag
+	ldr r1, [r0]
+	cmp r1, #0
+	bne context_switch_do
+
 	ldmfd sp!, {r0-r12, pc}^
+
+context_switch_do:
+	@clear flag
+	mov r1, #0
+	str r1, [r0]
+
+	mov r0, sp
+	add sp, sp, #16
+
+	ldmfd sp!, {r4-r12, lr}
+
+	mov r1, lr
+	mrs r2, spsr
+
+	@change to svc mode
+	msr cpsr, r2
+
+	ldmfd sp!, {r1}
+	ldmfd sp!, {r4-r12, lr}
+	stmfd r0!, {r3-r6}
+	ldmfd sp!, {r2-r6}
+
+	@get from->sp
+	ldr r0, =from_stack
+	ldr r1, [r0]
+	str sp, [r1]
+
+	@load to->sp
+	ldr r0, =to_stack
+	ldr r1, [r0]
+	ldr sp, [r1]
+
+	ldmfd sp!, {r0}
+	msr cpsr, r0
+	ldmfd sp!, {r0-r12, lr, pc}
 
 _fiq_ret:
 	ldmfd sp!, {r0-r7, pc}^
