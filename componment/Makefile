@@ -1,4 +1,5 @@
 objs := list.o init.o thread.o scheduler.o
+
 pres := list.i init.i thread.i scheduler.i
 
 all : $(objs)
