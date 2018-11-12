@@ -253,10 +253,10 @@ context_switch_do:
 	@change to svc mode
 	msr cpsr, r2
 
-	ldmfd sp!, {r1}
-	ldmfd sp!, {r4-r12, lr}
-	stmfd r0!, {r3-r6}
-	ldmfd sp!, {r2-r6}
+	stmfd sp!, {r1}
+	stmfd sp!, {r4-r12, lr}
+	ldmfd r0!, {r3-r6}
+	stmfd sp!, {r2-r6}
 
 	@get from->sp
 	ldr r0, =from_stack
