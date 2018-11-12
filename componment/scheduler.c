@@ -7,9 +7,21 @@ extern int printf(const char *fmt, ...);
 static unsigned char init_stack[512];
 static struct task_struct st_head;
 
+static void delay(void)
+{
+	int i = 0;
+	int j = 0;
+
+	for(i = 0; i < 30000; i++)
+		for(j = 0; j < 10; j++);
+}
+
 void head_func(int a, char **p)
 {
-	printf("This is head_func\n\r");
+	while(1) {
+		printf("This is head_func\n\r");
+		delay();
+	}
 }
 
 static void schedule_init(void)
@@ -28,6 +40,8 @@ void scheduler(void *para)
 	struct list_head *pos;
 	struct task_struct *from, *to;
 
+	printf("in shceduler\n\r");
+
 	from = get_current();
 	pos = &(from->list);
 	pos = pos->next;
@@ -36,11 +50,9 @@ void scheduler(void *para)
 
 	current = to;
 
-	to->entry(1, (void *)0);
+	//to->entry(1, (void *)0);
 
 	context_switch(&(from->stack), &(to->stack));
-
-	printf("in shceduler, %p\n\r", to);
 }
 
 /*

@@ -91,18 +91,36 @@ void * stack_init(void *stack, unsigned int ss, task_t task)
 	return sp;
 }
 
+static void delay(void)
+{
+	int i = 0;
+	int j = 0;
+
+	for(i = 0; i < 30000; i++)
+		for(j = 0; j < 10; j++);
+}
+
 DECLARE_TASK(t1, 512)
 {
-	printf("this is t1\n\r");
+	while(1) {
+			printf("this is t1\n\r");
+			delay();
+	}
 }
 
 DECLARE_TASK(t2, 512)
 {
-	printf("this is t2\n\r");
+	while(1) {
+		printf("this is t2\n\r");
+		delay();
+	}
 }
 
 DECLARE_TASK(t3, 512)
 {
-	printf("this is t3\n\r");
+	while(1) {
+		printf("this is t3\n\r");
+		delay();
+	}
 }
 
