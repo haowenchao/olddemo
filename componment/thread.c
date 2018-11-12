@@ -29,7 +29,6 @@ int task_init(struct task_struct *t, task_t entry, void * stack, unsigned int ss
 	t->pid    = getpid();
 	t->status = TASK_READY;
 	t->stack  = stack_init(stack, ss, entry);
-	t->entry  = entry;
 
 	return 0;
 }
@@ -71,7 +70,7 @@ void * stack_init(void *stack, unsigned int ss, task_t task)
 
 	sp = (unsigned int*)p;
 
-	*--sp = (unsigned int*)task;
+	*--sp = (unsigned int )task;
 	*--sp = 0;
 	*--sp = 0;
 	*--sp = 0;

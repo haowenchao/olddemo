@@ -40,8 +40,6 @@ void scheduler(void *para)
 	struct list_head *pos;
 	struct task_struct *from, *to;
 
-	printf("in shceduler\n\r");
-
 	from = get_current();
 	pos = &(from->list);
 	pos = pos->next;
@@ -49,8 +47,6 @@ void scheduler(void *para)
 		struct task_struct, list);
 
 	current = to;
-
-	//to->entry(1, (void *)0);
 
 	context_switch(&(from->stack), &(to->stack));
 }
@@ -67,29 +63,11 @@ void scheduler_start(void)
 
 	current = to;
 
-	to->entry(1, (void *)0);
-
 	context_switch_to(to->stack);
 }
 
 void scheduler_add_ready(struct task_struct *t)
 {
 	list_add(&(st_head.list), &t->list);
-}
-
-struct list_head tlist;
-
-void add(void)
-{
-	list_add(&(st_head.list), &tlist);
-}
-
-void list(void)
-{
-	struct list_head *pos;
-
-	list_for_each(pos, &(st_head.list)) {
-		printf("%p\t", pos);
-	}
 }
 

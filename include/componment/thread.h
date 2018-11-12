@@ -25,9 +25,6 @@ struct task_struct{
 	//stack size
 	unsigned int ss;
 
-	//entry point
-	task_t entry;
-
 	//list node
 	struct list_head list;
 };
@@ -53,10 +50,9 @@ void * stack_init(void *, unsigned int, task_t);
 	{ \
 		task_init(&task_##func, func, stack_##func, ss); \
 		task_start(&task_##func); \
-		printf("init task %s\n\r", #func); \
 	} \
 	call_back2(init_##func); \
-	void func(int argc, char **argv) \
+	void func(int argc, char **argv) 
 
 #endif
 
