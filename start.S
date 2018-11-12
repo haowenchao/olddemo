@@ -170,7 +170,7 @@ init_stack:
 	ldr pc, =board_init
 
 _swi:
-	stmdb sp!, {r0-r12, lr}
+	stmfd sp!, {r0-r12, lr}
 
 	//get interrupt id
 	ldr r0, [lr, #-4]
@@ -185,7 +185,7 @@ _swi:
 _abort_prefetch:
 	//save environment
 	sub lr, lr, #4
-	stmdb sp!, {r0-r12, lr}
+	stmfd sp!, {r0-r12, lr}
 
 	//set return address
 	ldr lr, =_swi_irq_fiq_abt_ret
@@ -196,7 +196,7 @@ _abort_prefetch:
 _abort_data:
 	//save environment
 	sub lr, lr, #8
-	stmdb sp!, {r0-r12, lr}
+	stmfd sp!, {r0-r12, lr}
 
 	//set return address
 	ldr lr, =_swi_irq_fiq_abt_ret
@@ -207,7 +207,7 @@ _abort_data:
 _irq:
 	//save environment
 	sub lr, lr, #4
-	stmdb sp!, {r0-r12, lr}
+	stmfd sp!, {r0-r12, lr}
 
 	//set return address
 	ldr lr, =_swi_irq_fiq_abt_ret
@@ -218,7 +218,7 @@ _irq:
 _fiq:
 	//save environment
 	sub lr, lr, #4
-	stmdb sp!, {r0-r7, lr}
+	stmfd sp!, {r0-r7, lr}
 
 	//set return address
 	ldr lr, =_fiq_ret
@@ -226,11 +226,54 @@ _fiq:
 	//jump to handler
 	ldr pc, =do_fiq
 
+.global from_stack
+.global to_stack
+.global context_switch_flag
 _swi_irq_fiq_abt_ret:
-	ldmia sp!, {r0-r12, pc}^
+	ldr r0, =context_switch_flag
+	ldr r1, [r0]
+	cmp r1, #0
+	bne context_switch_do
+
+	ldmfd sp!, {r0-r12, pc}^
+
+context_switch_do:
+	@clear flag
+	mov r1, #0
+	str r1, [r0]
+
+	mov r0, sp
+	add sp, sp, #16
+
+	ldmfd sp!, {r4-r12, lr}
+
+	mov r1, lr
+	mrs r2, spsr
+
+	@change to svc mode
+	msr cpsr, r2
+
+	stmfd sp!, {r1}
+	stmfd sp!, {r4-r12, lr}
+	ldmfd r0!, {r3-r6}
+	stmfd sp!, {r2-r6}
+
+	@get from->sp
+	ldr r0, =from_stack
+	ldr r1, [r0]
+	str sp, [r1]
+
+	@load to->sp
+	ldr r0, =to_stack
+	ldr r1, [r0]
+	ldr sp, [r1]
+
+	ldmfd sp!, {r0}
+	msr cpsr, r0
+	ldmfd sp!, {r0-r12, lr, pc}
 
 _fiq_ret:
-	ldmia sp!, {r0-r7, pc}^
+	ldmfd sp!, {r0-r7, pc}^
 
 halt_loop:
 	b halt_loop
