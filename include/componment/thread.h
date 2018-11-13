@@ -27,6 +27,7 @@ struct task_struct{
 
 	//list node
 	struct list_head list;
+	struct list_head klist;
 };
 
 extern struct task_struct *current;

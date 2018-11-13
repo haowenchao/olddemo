@@ -8,6 +8,13 @@ unsigned int to_stack;
 unsigned int context_switch_flag = 0;
 
 struct task_struct *current;
+static struct list_head threads;
+
+static void thread_comp_init(void)
+{
+	list_init(&threads);
+}
+call_back1(thread_comp_init);
 
 static unsigned int getpid(void)
 {
@@ -30,7 +37,20 @@ int task_init(struct task_struct *t, task_t entry, void * stack, unsigned int ss
 	t->status = TASK_READY;
 	t->stack  = stack_init(stack, ss, entry);
 
+	list_add(&threads, &(t->klist));
 	return 0;
+}
+
+void list_all(void)
+{
+	struct list_head *p;
+	struct task_struct *t;
+
+	printf("pid\tstaus\n\r");
+	list_for_each(p, &threads) {
+		t = container_of(p, struct task_struct, klist);
+		printf("%d\t%d\n\r", t->pid, t->status);
+	}
 }
 
 void task_start(struct task_struct *t)

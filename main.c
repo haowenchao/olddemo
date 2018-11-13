@@ -101,6 +101,7 @@ int main(void)
 		printf("[e] to exit clock mode\n\r");
 		printf("[a] to test rtc alarm\n\r");
 		printf("[i] to enter the swi mode\n\r");
+		printf("[z] to list all tasks\n\r");
 		printf("enter your selection\n\r");
 
 		scanf("%c", &t);
@@ -204,6 +205,10 @@ int main(void)
 
 			//start schedule
 			scheduler_start();
+		break;
+
+		case 'z':
+			list_all();
 		break;
 		}
 	}
