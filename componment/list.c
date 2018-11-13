@@ -10,6 +10,19 @@ int list_init(struct list_head *list)
 	return 0;
 }
 
+int list_add_tail(struct list_head *head, struct list_head *new)
+{
+	if (NULL == head || NULL == new)
+		return -1;
+
+	new->next = head;
+	new->prev = head->prev;
+	head->prev->next = new;
+	head->prev = new;
+
+	return 0;
+}
+
 int list_add(struct list_head *head, struct list_head *new)
 {
 	if (NULL == head || NULL == new)
