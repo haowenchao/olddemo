@@ -5,7 +5,7 @@
 extern int printf(const char *fmt, ...);
 
 static unsigned char init_stack[512];
-static struct task_struct st_head;
+static struct list_head ready_list;
 
 static void delay(void)
 {
@@ -26,8 +26,7 @@ void head_func(int a, char **p)
 
 static void schedule_init(void)
 {
-	list_init(&(st_head.list));
-	task_init(&st_head, head_func, init_stack, 512);
+	list_init(&ready_list);
 }
 
 call_back1(schedule_init);
@@ -48,6 +47,9 @@ void scheduler(void *para)
 
 	current = to;
 
+	list_del(&(to->list));
+	list_add_tail(&ready_list, &(from->list));
+
 	context_switch(&(from->stack), &(to->stack));
 }
 
@@ -58,7 +60,7 @@ void scheduler_start(void)
 {
 	struct task_struct *to;
 
-	to = (struct task_struct *)container_of(&(st_head.list).next, \
+	to = (struct task_struct *)container_of(ready_list.next, \
 		struct task_struct, list);
 
 	current = to;
@@ -68,6 +70,6 @@ void scheduler_start(void)
 
 void scheduler_add_ready(struct task_struct *t)
 {
-	list_add(&(st_head.list), &t->list);
+	list_add_tail(&ready_list, &t->list);
 }
 
