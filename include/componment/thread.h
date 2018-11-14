@@ -5,7 +5,7 @@
 #include "componment/thread.h"
 #include "componment/init.h"
 
-typedef void (*task_t)(int argc, char **argv);
+typedef void (*task_t)(void *para);
 enum task_status {
 	TASK_READY   = 1,
 	TASK_RUN     = 2,
@@ -46,14 +46,14 @@ void * stack_init(void *, unsigned int, task_t);
 #define DECLARE_TASK(func, ss)	\
 	static unsigned char stack_##func[ss]; \
 	static struct task_struct task_##func; \
-	void func(int argc, char **argv); \
+	void func(void *p); \
 	void init_##func(void) \
 	{ \
 		task_init(&task_##func, func, stack_##func, ss); \
 		task_start(&task_##func); \
 	} \
 	call_back2(init_##func); \
-	void func(int argc, char **argv) 
+	void func(void *p)
 
 #endif
 
