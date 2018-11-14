@@ -20,19 +20,19 @@
 #define RXD0READY	(1)
 
 /*Memory Controllers*/
-#define     BWSCON                   (*(volatile unsigned long *)0x48000000)   //Bus width & wait status control   
-#define     BANKCON0                 (*(volatile unsigned long *)0x48000004)   //Boot ROM control                  
-#define     BANKCON1                 (*(volatile unsigned long *)0x48000008)   //BANK1 control                     
-#define     BANKCON2                 (*(volatile unsigned long *)0x4800000C)   //BANK2 control                     
-#define     BANKCON3                 (*(volatile unsigned long *)0x48000010)   //BANK3 control                     
-#define     BANKCON4                 (*(volatile unsigned long *)0x48000014)   //BANK4 control                     
-#define     BANKCON5                 (*(volatile unsigned long *)0x48000018)   //BANK5 control                     
-#define     BANKCON6                 (*(volatile unsigned long *)0x4800001C)   //BANK6 control                     
-#define     BANKCON7                 (*(volatile unsigned long *)0x48000020)   //BANK7 control                     
-#define     REFRESH                  (*(volatile unsigned long *)0x48000024)   //DRAM/SDRAM refresh control        
-#define     BANKSIZE                 (*(volatile unsigned long *)0x48000028)   //Flexible bank size                
-#define     MRSRB6                   (*(volatile unsigned long *)0x4800002C)   //Mode register set for SDRAM BANK6 
-#define     MRSRB7                   (*(volatile unsigned long *)0x48000030)   //Mode register set for SDRAM BANK7 
+#define     BWSCON    (*(volatile unsigned long *)0x48000000)
+#define     BANKCON0  (*(volatile unsigned long *)0x48000004)
+#define     BANKCON1  (*(volatile unsigned long *)0x48000008)
+#define     BANKCON2  (*(volatile unsigned long *)0x4800000C)
+#define     BANKCON3  (*(volatile unsigned long *)0x48000010)
+#define     BANKCON4  (*(volatile unsigned long *)0x48000014)
+#define     BANKCON5  (*(volatile unsigned long *)0x48000018)
+#define     BANKCON6  (*(volatile unsigned long *)0x4800001C)
+#define     BANKCON7  (*(volatile unsigned long *)0x48000020)
+#define     REFRESH   (*(volatile unsigned long *)0x48000024)
+#define     BANKSIZE  (*(volatile unsigned long *)0x48000028)
+#define     MRSRB6    (*(volatile unsigned long *)0x4800002C)
+#define     MRSRB7    (*(volatile unsigned long *)0x48000030)
 
 void sdram_init(void)
 {
