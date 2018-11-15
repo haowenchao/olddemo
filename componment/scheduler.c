@@ -16,14 +16,6 @@ static void delay(void)
 		for(j = 0; j < 10; j++);
 }
 
-void head_func(int a, char **p)
-{
-	while(1) {
-		printf("This is head_func\n\r");
-		delay();
-	}
-}
-
 static void schedule_init(void)
 {
 	list_init(&ready_list);
