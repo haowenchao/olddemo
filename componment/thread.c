@@ -122,8 +122,8 @@ static void delay(void)
 DECLARE_TASK(t1, 512)
 {
 	while(1) {
-			printf("this is t1\n\r");
-			delay();
+		printf("this is t1\n\r");
+		delay();
 	}
 }
 
