@@ -37,7 +37,7 @@ int task_init(struct task_struct *t, task_t entry, void * stack, unsigned int ss
 	t->status = TASK_READY;
 	t->stack  = stack_init(stack, ss, entry);
 
-	list_add(&threads, &(t->klist));
+	list_add_tail(&threads, &(t->klist));
 	return 0;
 }
 
