@@ -7,20 +7,10 @@ extern int printf(const char *fmt, ...);
 static unsigned char init_stack[512];
 static struct list_head ready_list;
 
-static void delay(void)
-{
-	int i = 0;
-	int j = 0;
-
-	for(i = 0; i < 30000; i++)
-		for(j = 0; j < 10; j++);
-}
-
 static void schedule_init(void)
 {
 	list_init(&ready_list);
 }
-
 call_back1(schedule_init);
 
 /*
