@@ -166,6 +166,17 @@ init_stack:
 	orr r0, r0, #0x13
 	msr cpsr_c, r0
 
+.global __bss_start
+.global __bss_end
+	//clear bss section
+	ldr r0, =__bss_start
+	ldr r1, =__bss_end
+	mov r2, #0
+bss_loop:
+	str r2, [r0], #4
+	cmp r0, r1
+	bne bss_loop
+
 	//jump to board init
 	ldr pc, =board_init
 
