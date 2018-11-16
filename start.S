@@ -223,6 +223,11 @@ _irq:
 	//set return address
 	ldr lr, =_swi_irq_fiq_abt_ret
 
+	//set context_irq
+	ldr r0, =context_irq
+	mov r1, #1
+	str r1, [r0]
+
 	//jump to handler
 	ldr pc, =do_irq
 
@@ -239,6 +244,7 @@ _fiq:
 
 .global from_stack
 .global to_stack
+.global context_irq
 .global context_switch_flag
 _swi_irq_fiq_abt_ret:
 	ldr r0, =context_switch_flag
@@ -246,10 +252,20 @@ _swi_irq_fiq_abt_ret:
 	cmp r1, #0
 	bne context_switch_do
 
+	//clear context_irq
+	ldr r0, =context_irq
+	mov r1, #0
+	str r1, [r0]
+
 	ldmfd sp!, {r0-r12, pc}^
 
 context_switch_do:
 	@clear flag
+	mov r1, #0
+	str r1, [r0]
+
+	//clear context_irq
+	ldr r0, =context_irq
 	mov r1, #0
 	str r1, [r0]
 

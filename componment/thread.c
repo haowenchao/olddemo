@@ -6,6 +6,7 @@ extern int printf(const char *fmt, ...);
 unsigned int from_stack;
 unsigned int to_stack;
 unsigned int context_switch_flag = 0;
+unsigned int context_irq = 0;
 
 struct task_struct *current;
 static struct list_head threads;
@@ -81,6 +82,10 @@ void context_switch(void *from, void *to)
 	from_stack = (unsigned int)from;
 	to_stack = (unsigned int)to;
 	context_switch_flag = 1;
+
+	if(context_irq) {
+		printf("irq context\n\r");
+	}
 }
 
 void * stack_init(void *stack, unsigned int ss, task_t task)
