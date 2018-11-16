@@ -9,7 +9,7 @@ OBJCOPYFLAGS	:= -O binary -S
 OBJDUMPFLAGS	:= -D -S
 export CC LD CFLAGS
 
-objs := start.o board.o s3c24xx.o context.o main.o nand.o swi.o interrupt.o exception.o rtc.o lib/lib.o componment/componment.o
+objs := start.o board.o s3c24xx.o context.o main.o timer.o nand.o swi.o interrupt.o exception.o rtc.o lib/lib.o componment/componment.o
 
 pres := board.i s3c24xx.i main.i nand.i swi.i interrupt.i exception.i rtc.i
 

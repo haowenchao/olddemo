@@ -2,6 +2,7 @@
 #include "lib/printf.h"
 #include "nand.h"
 #include "rtc.h"
+#include "timer.h"
 #include "interrupt.h"
 #include "componment/scheduler.h"
 
@@ -81,6 +82,11 @@ static void rtc_handler(void *para)
 static void tick_handler(void *para)
 {
 	timer();
+}
+
+static void test(void *p)
+{
+	printf("timer test\n\r");
 }
 
 int main(void)
@@ -209,6 +215,17 @@ int main(void)
 
 		case 'z':
 			list_all();
+		break;
+
+		case 'y':
+			request_irq(10, test, (void *)0);
+			timer0_set_cnt(0xffff);
+			timer0_manual_update();
+			timer0_start();
+		break;
+
+		case 'v':
+			timer0_stop();
 		break;
 		}
 	}
