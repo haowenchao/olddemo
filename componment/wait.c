@@ -1,5 +1,10 @@
 #include "componment/wait.h"
 
+void wait_queue_init(struct wait_queue *q)
+{
+	//init queue
+}
+
 void wait_event(struct wait_queue *queue, unsigned int condition)
 {
 	if(condition) {
