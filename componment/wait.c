@@ -7,14 +7,14 @@ void wait_queue_init(struct wait_queue *q)
 
 void wait_event(struct wait_queue *queue, unsigned int condition)
 {
-	if(condition) {
+	if(!condition) {
 		return;
 	}
 
+	printf("wait signal\n\r");
 	//modify current status
 
 	//del current task from ready list
-
 
 	//add current task to wait queue
 
@@ -23,6 +23,7 @@ void wait_event(struct wait_queue *queue, unsigned int condition)
 
 void wake_up(struct wait_queue *queue)
 {
+	printf("start queue\n\r");
 	//each object in queue
 
 	//modify object status

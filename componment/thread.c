@@ -1,3 +1,4 @@
+#include "componment/wait.h"
 #include "componment/thread.h"
 #include "componment/scheduler.h"
 
@@ -83,7 +84,11 @@ void context_switch(void *from, void *to)
 	to_stack = (unsigned int)to;
 	context_switch_flag = 1;
 
-	if(context_irq) {
+	if(!context_irq) {
+		context_irq = 0;
+		printf("task context\n\r");
+		asm("swi 1");
+	} else {
 		printf("irq context\n\r");
 	}
 }
@@ -124,11 +129,17 @@ static void delay(void)
 		for(j = 0; j < 10; j++);
 }
 
+static unsigned int cnt = 0;
+
+struct wait_queue task_queue;
+
 DECLARE_TASK(t1, 512)
 {
 	while(1) {
-		printf("this is t1\n\r");
+		cnt++;
+		printf("this is t1, cnt = %d\n\r", cnt);
 		delay();
+		wait_event(&task_queue, cnt>10);
 	}
 }
 
@@ -137,6 +148,14 @@ DECLARE_TASK(t2, 512)
 	while(1) {
 		printf("this is t2\n\r");
 		delay();
+
+		if(cnt > 10) {
+			cnt++;
+		}
+		if(cnt > 20) {
+			wake_up(&task_queue);
+			cnt = 0;
+		}
 	}
 }
 
