@@ -24,13 +24,14 @@ void scheduler(void *para)
 	from = get_current();
 	pos = &(from->list);
 	pos = pos->next;
+	if(pos == &ready_list) {
+		pos = pos->next;
+	}
+
 	to = (struct task_struct *)container_of(pos, \
 		struct task_struct, list);
 
 	current = to;
-
-	list_del(&(to->list));
-	list_add_tail(&ready_list, &(from->list));
 
 	context_switch(&(from->stack), &(to->stack));
 }
@@ -47,12 +48,16 @@ void scheduler_start(void)
 
 	current = to;
 
-	list_del(&(to->list));
 	context_switch_to(to->stack);
 }
 
 void scheduler_add_ready(struct task_struct *t)
 {
 	list_add_tail(&ready_list, &t->list);
+}
+
+void scheduler_del_ready(struct task_struct *t)
+{
+	list_del(&t->list);
 }
 
