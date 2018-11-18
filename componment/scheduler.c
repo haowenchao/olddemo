@@ -47,6 +47,7 @@ void scheduler_start(void)
 
 	current = to;
 
+	list_del(&(to->list));
 	context_switch_to(to->stack);
 }
 
