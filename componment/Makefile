@@ -1,6 +1,6 @@
-objs := list.o init.o thread.o scheduler.o
+objs := list.o init.o thread.o scheduler.o wait.o
 
-pres := list.i init.i thread.i scheduler.i
+pres := list.i init.i thread.i scheduler.i wait.i
 
 all : $(objs)
 	arm-none-eabi-ld -r -o componment.o $^
