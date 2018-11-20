@@ -86,10 +86,7 @@ void context_switch(void *from, void *to)
 
 	if(!context_irq) {
 		context_irq = 0;
-		printf("task context\n\r");
 		asm("swi 1");
-	} else {
-		printf("irq context\n\r");
 	}
 }
 
@@ -136,34 +133,22 @@ struct wait_queue task_queue;
 DECLARE_TASK(t1, 512)
 {
 	while(1) {
-		cnt++;
-		printf("this is t1, cnt = %d\n\r", cnt);
-		delay();
-		wait_event(&task_queue, cnt>10);
+		printf("task id = %d\n\r", current->pid);
 	}
 }
 
 DECLARE_TASK(t2, 512)
 {
 	while(1) {
-		printf("this is t2\n\r");
-		delay();
-
-		if(cnt > 10) {
-			cnt++;
-		}
-		if(cnt > 20) {
-			wake_up(&task_queue);
-			cnt = 0;
-		}
+		printf("task id = %d\n\r", current->pid);
+		scheduler((void *)0);
 	}
 }
 
 DECLARE_TASK(t3, 512)
 {
 	while(1) {
-		printf("this is t3\n\r");
-		delay();
+		printf("task id = %d\n\r", current->pid);
 	}
 }
 
