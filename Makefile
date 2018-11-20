@@ -3,11 +3,14 @@ LD		:= arm-none-eabi-ld
 OBJDUMP		:= arm-none-eabi-objdump
 OBJCOPY		:= arm-none-eabi-objcopy
 READELF		:= arm-none-eabi-readelf
-CFLAGS		:= -c -nostdinc -fno-builtin -I$(shell pwd)/include 
+CFLAGS		:= -c -nostdinc -fno-builtin -I$(shell pwd)/include -Wall \
+		-O2
+
 LDFLAGS		:= -Tlink.lds -nostdlib
 OBJCOPYFLAGS	:= -O binary -S
 OBJDUMPFLAGS	:= -D -S
 export CC LD CFLAGS
+HOSTCXXFLAGS := -O2 $(HOST_LFS_CFLAGS)
 
 objs := start.o board.o s3c24xx.o context.o main.o timer.o nand.o swi.o interrupt.o exception.o rtc.o lib/lib.o componment/componment.o
 
