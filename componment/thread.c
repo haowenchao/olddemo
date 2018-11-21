@@ -130,7 +130,7 @@ DECLARE_TASK(t2, 512)
 {
 	while(1) {
 		printf("task id = %d\n\r", current->pid);
-		scheduler((void *)0);
+		scheduler();
 	}
 }
 

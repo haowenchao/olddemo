@@ -15,7 +15,7 @@ call_back1(schedule_init);
 /*
  * Do a scheduler
  */
-void scheduler(void *para)
+void scheduler(void)
 {
 	struct list_head *pos;
 	struct task_struct *from, *to;
