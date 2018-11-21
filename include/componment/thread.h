@@ -44,10 +44,11 @@ void context_switch(void *from, void *to);
 void * stack_init(void *, unsigned int, task_t);
 
 #define DECLARE_TASK(func, ss)	\
+	static void init_##func(void); \
 	static unsigned char stack_##func[ss]; \
 	static struct task_struct task_##func; \
 	void func(void *p); \
-	void init_##func(void) \
+	static void init_##func(void) \
 	{ \
 		task_init(&task_##func, func, stack_##func, ss); \
 		task_start(&task_##func); \
