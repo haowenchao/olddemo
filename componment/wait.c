@@ -1,5 +1,7 @@
 #include "componment/wait.h"
 
+extern int printf(const char *fmt, ...);
+
 void wait_queue_init(struct wait_queue *q)
 {
 	//init queue

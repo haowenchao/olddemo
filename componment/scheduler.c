@@ -4,7 +4,6 @@
 
 extern int printf(const char *fmt, ...);
 
-static unsigned char init_stack[512];
 static struct list_head ready_list;
 
 static void schedule_init(void)

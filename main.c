@@ -89,6 +89,7 @@ static void test(void *p)
 	printf("timer test\n\r");
 }
 
+extern void list_all(void);
 int main(void)
 {
 	char t;

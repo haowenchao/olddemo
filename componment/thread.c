@@ -117,17 +117,6 @@ void * stack_init(void *stack, unsigned int ss, task_t task)
 	return sp;
 }
 
-static void delay(void)
-{
-	int i = 0;
-	int j = 0;
-
-	for(i = 0; i < 30000; i++)
-		for(j = 0; j < 10; j++);
-}
-
-static unsigned int cnt = 0;
-
 struct wait_queue task_queue;
 
 DECLARE_TASK(t1, 512)

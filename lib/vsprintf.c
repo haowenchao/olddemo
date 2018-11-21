@@ -275,10 +275,6 @@ int vsnprintf(char *buf, size_t size, const char *fmt, va_list args)
 
 	/* Reject out-of-range values early */
 	if (unlikely((int) size < 0)) {
-		/* There can be only one.. */
-		static int warn = 1;
-//		WARN_ON(warn);
-		warn = 0;
 		return 0;
 	}
 

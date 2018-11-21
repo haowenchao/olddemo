@@ -192,6 +192,8 @@ int rtc_alarm_valid(enum alarm source)
 	case yearen:
 	break;
 	}
+
+	return 0;
 }
 
 void rtc_enable_tick(unsigned char period)
