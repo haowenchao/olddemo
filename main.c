@@ -225,6 +225,12 @@ int main(void)
 			timer0_start();
 		break;
 
+		case 'h':
+			printf("delay start\n\r");
+			delay_ms(2000);
+			printf("delay stop\n\r");
+		break;
+
 		case 'v':
 			timer0_stop();
 		break;

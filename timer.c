@@ -71,3 +71,20 @@ void timer0_set_cnt(unsigned short val)
 	TCNTB0 = val;
 }
 
+void ms(void)
+{
+	timer0_set_cnt(500);
+	timer0_manual_update();
+	timer0_start();
+
+	while(TCNTO0) {
+	}
+}
+
+void delay_ms(unsigned int time)
+{
+	while(time--){
+		ms();
+	}
+}
+
