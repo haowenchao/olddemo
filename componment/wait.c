@@ -1,39 +1,54 @@
 #include "componment/wait.h"
-
-extern int printf(const char *fmt, ...);
+#include "componment/scheduler.h"
+#include "componment/list.h"
+#include "componment/thread.h"
 
 void wait_queue_init(struct wait_queue *q)
 {
 	//init queue
+	list_init(&q->list);
 }
 
 void wait_event(struct wait_queue *queue, unsigned int condition)
 {
-	if(!condition) {
+	if(condition) {
 		return;
 	}
 
-	printf("wait signal\n\r");
 	//modify current status
+	current->status = TASK_BLOCKED;
 
 	//del current task from ready list
+	scheduler_del_ready(current);
 
 	//add current task to wait queue
+	list_add_tail(&queue->list, &current->qlist);
 
 	//do a scheduler
+	scheduler();
 }
 
 void wake_up(struct wait_queue *queue)
 {
-	printf("start queue\n\r");
+	struct list_head *pos;
+	struct task_struct *p;
+
 	//each object in queue
+	list_for_each(pos, &queue->list) {
+		pos = (&(queue->list))->next;
 
-	//modify object status
+		p = container_of(pos, struct task_struct, qlist);
 
-	//del from queue
+		//modify object status
+		p->status = TASK_READY;
 
-	//add to ready list
+		//add to ready list
+		scheduler_add_ready(p);
+	}
+
+	list_init(&queue->list);
 
 	//do a scheduler
+	scheduler();
 }
 

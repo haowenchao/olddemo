@@ -22,7 +22,7 @@ static unsigned int getpid(void)
 {
 	static unsigned int a = 0;
 
-	return a++;
+	return ++a;
 }
 
 /*
@@ -119,9 +119,19 @@ void * stack_init(void *stack, unsigned int ss, task_t task)
 
 struct wait_queue task_queue;
 
+DECLARE_WAIT_QUEUE_STATIC(t2_wait);
+
+static unsigned int cnt = 1;
+
 DECLARE_TASK(t1, 512)
 {
+	wait_queue_init(&t2_wait);
+
 	while(1) {
+		if(cnt != 0)
+			cnt++;
+
+		delay_ms(500);
 		printf("task id = %d\n\r", current->pid);
 	}
 }
@@ -129,15 +139,23 @@ DECLARE_TASK(t1, 512)
 DECLARE_TASK(t2, 512)
 {
 	while(1) {
+		delay_ms(500);
 		printf("task id = %d\n\r", current->pid);
-		scheduler();
+
+		wait_event(&t2_wait, (cnt < 5));
 	}
 }
 
 DECLARE_TASK(t3, 512)
 {
 	while(1) {
+		delay_ms(500);
 		printf("task id = %d\n\r", current->pid);
+
+		if(cnt >= 10) {
+			cnt = 0;
+			wake_up(&t2_wait);
+		}
 	}
 }
 
