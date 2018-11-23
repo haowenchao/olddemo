@@ -21,14 +21,19 @@ void scheduler(void)
 	struct task_struct *from, *to;
 
 	from = get_current();
-	pos = &(from->list);
-	pos = pos->next;
-	if(pos == &ready_list) {
+	if(from->status != TASK_BLOCKED) {
+		pos = &(from->list);
 		pos = pos->next;
+		if(pos == &ready_list) {
+			pos = pos->next;
+		}
+		to = (struct task_struct *)container_of(pos, \
+			struct task_struct, list);
+	} else {
+		to = (struct task_struct *)container_of( \
+			ready_list.next, \
+			struct task_struct, list);
 	}
-
-	to = (struct task_struct *)container_of(pos, \
-		struct task_struct, list);
 
 	current = to;
 
