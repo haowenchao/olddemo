@@ -15,6 +15,7 @@ int list_init(struct list_head *);
 int list_add_tail(struct list_head *head, struct list_head *new);
 int list_add(struct list_head *, struct list_head *);
 int list_del(struct list_head *);
+int is_empty(struct list_head *);
 
 #define offsetof(type, member) \
 	((unsigned long) &((type *)0)->member)

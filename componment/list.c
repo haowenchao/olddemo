@@ -47,4 +47,12 @@ int list_del(struct list_head *node)
 	return 0;
 }
 
+int is_empty(struct list_head *p)
+{
+	if(p->next == p && p->prev == p) {
+		return 1;
+	} else {
+		return 0;
+	}
+}
 
