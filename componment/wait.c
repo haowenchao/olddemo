@@ -18,9 +18,6 @@ void wait_event(struct wait_queue *queue, unsigned int condition)
 	//modify current status
 	current->status = TASK_BLOCKED;
 
-	//del current task from ready list
-	scheduler_del_ready(current);
-
 	//add current task to wait queue
 	list_add_tail(&queue->list, &current->qlist);
 
@@ -43,7 +40,7 @@ void wake_up(struct wait_queue *queue)
 		p->status = TASK_READY;
 
 		//add to ready list
-		scheduler_add_ready(p);
+		scheduler_add_task(p);
 	}
 
 	list_init(&queue->list);

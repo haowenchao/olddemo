@@ -3,6 +3,7 @@
 #include "componment/scheduler.h"
 
 extern int printf(const char *fmt, ...);
+extern void delay_ms(unsigned int time);
 
 unsigned int from_stack;
 unsigned int to_stack;
@@ -33,11 +34,13 @@ struct task_struct* task_create(task_t entry, unsigned int ss)
 	return (void *)0;
 }
 
-int task_init(struct task_struct *t, task_t entry, void * stack, unsigned int ss)
+int task_init(struct task_struct *t, task_t entry, void * stack, \
+	      unsigned int ss, unsigned int slice)
 {
-	t->pid    = getpid();
-	t->status = TASK_READY;
-	t->stack  = stack_init(stack, ss, entry);
+	t->pid       = getpid();
+	t->status    = TASK_READY;
+	t->set_slice = slice;
+	t->stack     = stack_init(stack, ss, entry);
 
 	list_add_tail(&threads, &(t->klist));
 	return 0;
@@ -61,7 +64,7 @@ void task_start(struct task_struct *t)
 		return;
 
 	//add to list
-	scheduler_add_ready(t);
+	scheduler_add_task(t);
 }
 
 void task_suspend(struct task_struct *t)
@@ -123,7 +126,7 @@ DECLARE_WAIT_QUEUE_STATIC(t2_wait);
 
 static unsigned int cnt = 1;
 
-DECLARE_TASK(t1, 512)
+DECLARE_TASK(t1, 512, 20)
 {
 	wait_queue_init(&t2_wait);
 
@@ -136,7 +139,7 @@ DECLARE_TASK(t1, 512)
 	}
 }
 
-DECLARE_TASK(t2, 512)
+DECLARE_TASK(t2, 512, 20)
 {
 	while(1) {
 		delay_ms(500);
@@ -146,7 +149,7 @@ DECLARE_TASK(t2, 512)
 	}
 }
 
-DECLARE_TASK(t3, 512)
+DECLARE_TASK(t3, 512, 20)
 {
 	while(1) {
 		delay_ms(500);

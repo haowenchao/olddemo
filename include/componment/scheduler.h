@@ -4,8 +4,8 @@
 
 void scheduler(void);
 void scheduler_start(void);
-void scheduler_add_ready(struct task_struct *t);
-void scheduler_del_ready(struct task_struct *t);
+void scheduler_add_task(struct task_struct *t);
+void tick(void);
 
 #endif
 
