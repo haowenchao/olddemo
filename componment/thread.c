@@ -137,6 +137,7 @@ DECLARE_TASK(t1, 512, 20)
 
 		delay_ms(500);
 		printf("task id = %d\n\r", current->pid);
+		printf("this is task t1\n\r");
 		printf("*************************cnt = %d\n\r", cnt);
 	}
 }
@@ -146,6 +147,7 @@ DECLARE_TASK(t2, 512, 20)
 	while(1) {
 		delay_ms(500);
 		printf("task id = %d\n\r", current->pid);
+		printf("this is task t2\n\r");
 		printf("*************************cnt = %d\n\r", cnt);
 
 		wait_event(&t2_wait, (cnt < 5));
@@ -157,12 +159,23 @@ DECLARE_TASK(t3, 512, 20)
 	while(1) {
 		delay_ms(500);
 		printf("task id = %d\n\r", current->pid);
+		printf("this is task t3\n\r");
 		printf("*************************cnt = %d\n\r", cnt);
 
 		if(cnt >= 10) {
 			cnt = 0;
 			wake_up(&t2_wait);
 		}
+	}
+}
+
+DECLARE_TASK(t4, 512, 20)
+{
+	while(1) {
+		delay_ms(500);
+		printf("task id = %d\n\r", current->pid);
+		printf("this is task t4\n\r");
+		printf("*************************cnt = %d\n\r", cnt);
 	}
 }
 
