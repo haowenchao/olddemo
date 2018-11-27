@@ -155,7 +155,7 @@ DECLARE_TASK(t3, 512, 20)
 		delay_ms(500);
 		printf("task id = %d\n\r", current->pid);
 
-		if(cnt >= 10) {
+		if(cnt >= 30) {
 			cnt = 0;
 			wake_up(&t2_wait);
 		}
