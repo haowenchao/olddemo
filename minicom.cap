@@ -1,5 +1,5 @@
 
-tick is set to 125ms
+system starting
 
 *********** haowenchao boot menu ************
 [w] to write test data to nand flash
@@ -14,169 +14,395 @@ tick is set to 125ms
 [z] to list all tasks
 enter your selection
 task id = 1
-this is task t4
 *************************cnt = 1
 task id = 1
-this is task t4
 *************************cnt = 1
 task id = 1
-this is task t4
 *************************cnt = 1
 task id = 1
-this is task t4
 *************************cnt = 1
 ##################################in scheduler calling context_switch
 task id = 2
-this is task t3
 *************************cnt = 1
+###########################wait_event is called
 task id = 2
-this is task t3
 *************************cnt = 1
+###########################wait_event is called
 task id = 2
-this is task t3
 *************************cnt = 1
+###########################wait_event is called
 task id = 2
-this is task t3
 *************************cnt = 1
+###########################wait_event is called
 ##################################in scheduler calling context_switch
 task id = 3
-this is task t2
-*************************cnt = 1
-task id = 3
-this is task t2
-*************************cnt = 1
-task id = 3
-this is task t2
-*************************cnt = 1
-task id = 3
-this is task t2
-*************************cnt = 1
-##################################in scheduler calling context_switch
-task id = 4
-this is task t1
 *************************cnt = 2
-task id = 4
-this is task t1
+task id = 3
 *************************cnt = 3
-task id = 4
-this is task t1
+task id = 3
 *************************cnt = 4
-task id = 4
-this is task t1
+task id = 3
 *************************cnt = 5
 ##################################in scheduler calling context_switch
 task id = 1
-this is task t4
 *************************cnt = 6
 task id = 1
-this is task t4
 *************************cnt = 6
 task id = 1
-this is task t4
 *************************cnt = 6
 task id = 1
-this is task t4
 *************************cnt = 6
 task id = 1
-this is task t4
 *************************cnt = 6
 ##################################in scheduler calling context_switch
 task id = 2
-this is task t3
 *************************cnt = 6
-task id = 2
-this is task t3
-*************************cnt = 6
-task id = 2
-this is task t3
-*************************cnt = 6
-task id = 2
-this is task t3
-*************************cnt = 6
-task id = 2
-this is task t3
-*************************cnt = 6
-##################################in scheduler calling context_switch
-task id = 3
-this is task t2
-*************************cnt = 6
+###########################wait_event is called
 ###########################wait event
 ##################################in scheduler calling context_switch
 ##################################call swi
 
 swi enter, swi id = 1
-task id = 4
-this is task t1
+task id = 3
 *************************cnt = 6
-task id = 4
-this is task t1
+task id = 3
 *************************cnt = 7
-task id = 4
-this is task t1
+task id = 3
 *************************cnt = 8
-task id = 4
-this is task t1
+task id = 3
 *************************cnt = 9
-task id = 4
-this is task t1
+##################################in scheduler calling context_switch
+task id = 1
+*************************cnt = 10
+###########################wake up
+##################################in scheduler calling context_switch
+##################################call swi
+
+swi enter, swi id = 1
+task id = 3
+*************************cnt = 0
+task id = 3
+*************************cnt = 0
+task id = 3
+*************************cnt = 0
+task id = 3
+*************************cnt = 0
+task id = 3
+*************************cnt = 0
+##################################in scheduler calling context_switch
+task id = 2
+*************************cnt = 0
+###########################wait_event is called
+task id = 2
+*************************cnt = 0
+###########################wait_event is called
+task id = 2
+*************************cnt = 0
+###########################wait_event is called
+task id = 2
+*************************cnt = 0
+###########################wait_event is called
+##################################in scheduler calling context_switch
+task id = 1
+*************************cnt = 0
+task id = 1
+*************************cnt = 0
+task id = 1
+*************************cnt = 0
+task id = 1
+*************************cnt = 0
+##################################in scheduler calling context_switch
+task id = 3
+*************************cnt = 0
+task id = 3
+*************************cnt = 0
+task id = 3
+*************************cnt = 0
+task id = 3
+*************************cnt = 0
+
+system starting
+
+*********** haowenchao boot menu ************
+[w] to write test data to nand flash
+[r] to read the data writen in nand flash
+[s] to read the status register of processer
+[p] to print current time
+[m] to set current time
+[c] to enter clock mode
+[e] to exit clock mode
+[a] to test rtc alarm
+[i] to enter the swi mode
+[z] to list all tasks
+enter your selection
+
+*********** haowenchao boot menu ************
+[w] to write test data to nand flash
+[r] to read the data writen in nand flash
+[s] to read the status register of processer
+[p] to print current time
+[m] to set current time
+[c] to enter clock mode
+[e] to exit clock mode
+[a] to test rtc alarm
+[i] to enter the swi mode
+[z] to list all tasks
+enter your selection
+task id = 1
+*************************cnt = 1
+task id = 1
+*************************cnt = 1
+task id = 1
+*************************cnt = 1
+task id = 1
+*************************cnt = 1
+##################################in scheduler calling context_switch
+task id = 2
+*************************cnt = 1
+###########################wait_event is called
+task id = 2
+*************************cnt = 1
+###########################wait_event is called
+task id = 2
+*************************cnt = 1
+###########################wait_event is called
+task id = 2
+*************************cnt = 1
+###########################wait_event is called
+##################################in scheduler calling context_switch
+task id = 3
+*************************cnt = 2
+task id = 3
+*************************cnt = 3
+task id = 3
+*************************cnt = 4
+task id = 3
+*************************cnt = 5
+##################################in scheduler calling context_switch
+task id = 1
+*************************cnt = 6
+task id = 1
+*************************cnt = 6
+task id = 1
+*************************cnt = 6
+task id = 1
+*************************cnt = 6
+task id = 1
+*************************cnt = 6
+##################################in scheduler calling context_switch
+task id = 2
+*************************cnt = 6
+###########################wait_event is called
+###########################wait event
+##################################in scheduler calling context_switch
+##################################call swi
+
+swi enter, swi id = 1
+task id = 3
+*************************cnt = 6
+task id = 3
+*************************cnt = 7
+task id = 3
+*************************cnt = 8
+task id = 3
+*************************cnt = 9
+##################################in scheduler calling context_switch
+task id = 1
+*************************cnt = 10
+###########################wake up
+##################################in scheduler calling context_switch
+##################################call swi
+
+swi enter, swi id = 1
+task id = 3
+*************************cnt = 0
+task id = 3
+*************************cnt = 0
+task id = 3
+*************************cnt = 0
+task id = 3
+*************************cnt = 0
+task id = 3
+*************************cnt = 0
+##################################in scheduler calling context_switch
+task id = 2
+*************************cnt = 0
+###########################wait_event is called
+task id = 2
+*************************cnt = 0
+###########################wait_event is called
+task id = 2
+*************************cnt = 0
+###########################wait_event is called
+task id = 2
+*************************cnt = 0
+###########################wait_event is called
+##################################in scheduler calling context_switch
+task id = 1
+*************************cnt = 0
+task id = 1
+*************************cnt = 0
+task id = 1
+*************************cnt = 0
+task id = 1
+*************************cnt = 0
+##################################in scheduler calling context_switch
+task id = 3
+*************************cnt = 0
+
+system starting
+
+*********** haowenchao boot menu ************
+[w] to write test data to nand flash
+[r] to read the data writen in nand flash
+[s] to read the status register of processer
+[p] to print current time
+[m] to set current time
+[c] to enter clock mode
+[e] to exit clock mode
+[a] to test rtc alarm
+[i] to enter the swi mode
+[z] to list all tasks
+enter your selection
+
+Tick is set to 250ms
+
+*********** haowenchao boot menu ************
+[w] to write test data to nand flash
+[r] to read the data writen in nand flash
+[s] to read the status register of processer
+[p] to print current time
+[m] to set current time
+[c] to enter clock mode
+[e] to exit clock mode
+[a] to test rtc alarm
+[i] to enter the swi mode
+[z] to list all tasks
+enter your selection
+task id = 1
+*************************cnt = 1
+task id = 1
+*************************cnt = 1
+task id = 1
+*************************cnt = 1
+task id = 1
+*************************cnt = 1
+task id = 1
+*************************cnt = 1
+task id = 1
+*************************cnt = 1
+task id = 1
+*************************cnt = 1
+task id = 1
+*************************cnt = 1
+task id = 1
+*************************cnt = 1
+##################################in scheduler calling context_switch
+task id = 2
+*************************cnt = 1
+###########################wait_event is called
+task id = 2
+*************************cnt = 1
+###########################wait_event is called
+task id = 2
+*************************cnt = 1
+###########################wait_event is called
+task id = 2
+*************************cnt = 1
+###########################wait_event is called
+task id = 2
+*************************cnt = 1
+###########################wait_event is called
+task id = 2
+*************************cnt = 1
+###########################wait_event is called
+task id = 2
+*************************cnt = 1
+###########################wait_event is called
+task id = 2
+*************************cnt = 1
+###########################wait_event is called
+##################################in scheduler calling context_switch
+task id = 3
+*************************cnt = 2
+task id = 3
+*************************cnt = 3
+task id = 3
+*************************cnt = 4
+task id = 3
+*************************cnt = 5
+task id = 3
+*************************cnt = 6
+task id = 3
+*************************cnt = 7
+task id = 3
+*************************cnt = 8
+task id = 3
+*************************cnt = 9
+task id = 3
 *************************cnt = 10
 ##################################in scheduler calling context_switch
 task id = 1
-this is task t4
-*************************cnt = 11
-task id = 1
-this is task t4
-*************************cnt = 11
-task id = 1
-this is task t4
-*************************cnt = 11
-task id = 1
-this is task t4
-*************************cnt = 11
-##################################in scheduler calling context_switch
-task id = 2
-this is task t3
 *************************cnt = 11
 ###########################wake up
 ##################################in scheduler calling context_switch
 ##################################call swi
 
 swi enter, swi id = 1
-task id = 4
-this is task t1
+task id = 2
 *************************cnt = 0
-task id = 4
-this is task t1
+###########################wait_event is called
+task id = 2
 *************************cnt = 0
-task id = 4
-this is task t1
+###########################wait_event is called
+task id = 2
 *************************cnt = 0
-task id = 4
-this is task t1
+###########################wait_event is called
+task id = 2
 *************************cnt = 0
+###########################wait_event is called
+task id = 2
+*************************cnt = 0
+###########################wait_event is called
+task id = 2
+*************************cnt = 0
+###########################wait_event is called
+task id = 2
+*************************cnt = 0
+###########################wait_event is called
+task id = 2
+*************************cnt = 0
+###########################wait_event is called
+task id = 2
+*************************cnt = 0
+###########################wait_event is called
 ##################################in scheduler calling context_switch
 task id = 3
-this is task t2
 *************************cnt = 0
 task id = 3
-this is task t2
 *************************cnt = 0
 task id = 3
-this is task t2
 *************************cnt = 0
 task id = 3
-this is task t2
+*************************cnt = 0
+task id = 3
+*************************cnt = 0
+task id = 3
+*************************cnt = 0
+task id = 3
+*************************cnt = 0
+task id = 3
+*************************cnt = 0
+task id = 3
 *************************cnt = 0
 ##################################in scheduler calling context_switch
 task id = 1
-this is task t4
 *************************cnt = 0
 task id = 1
-this is task t4
 *************************cnt = 0
 task id = 1
-this is task t4
 *************************cnt = 0
 task id = 1
-this is task t4
+*************************cnt = 0
+task id = 1
 *************************cnt = 0

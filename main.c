@@ -95,7 +95,7 @@ int main(void)
 	char t;
 	int id = 0;
 
-	printf("\n\rtick is set to 125ms\n\r");
+	printf("\n\rsystem starting\n\r");
 
 	while(1) {
 		printf("\n\r*********** haowenchao boot menu ************\n\r");

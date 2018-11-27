@@ -13,6 +13,7 @@ void wait_queue_init(struct wait_queue *q)
 
 void wait_event(struct wait_queue *queue, unsigned int condition)
 {
+	printf("###########################wait_event is called\n\r");
 	if(condition) {
 		return;
 	}
