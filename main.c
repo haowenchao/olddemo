@@ -207,7 +207,7 @@ int main(void)
 
 		case 'u':
 			//set tick
-			rtc_enable_tick(15);
+			rtc_enable_tick(31);
 			request_irq(8, (void *)tick, (void *)0);
 
 			//start schedule

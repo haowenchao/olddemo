@@ -3,8 +3,6 @@
 #include "componment/list.h"
 #include "componment/thread.h"
 
-extern int printf(const char *fmt, ...);
-
 void wait_queue_init(struct wait_queue *q)
 {
 	//init queue
@@ -13,12 +11,9 @@ void wait_queue_init(struct wait_queue *q)
 
 void wait_event(struct wait_queue *queue, unsigned int condition)
 {
-	printf("###########################wait_event is called\n\r");
 	if(condition) {
 		return;
 	}
-
-	printf("###########################wait event\n\r");
 
 	//modify current status
 	current->status = TASK_BLOCKED;
@@ -35,7 +30,6 @@ void wake_up(struct wait_queue *queue)
 	struct list_head *pos;
 	struct task_struct *p;
 
-	printf("###########################wake up\n\r");
 	//each object in queue
 	list_for_each(pos, &queue->list) {
 		pos = (&(queue->list))->next;

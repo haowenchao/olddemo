@@ -88,7 +88,6 @@ void context_switch(void *from, void *to)
 	context_switch_flag = 1;
 
 	if(!context_irq) {
-		printf("##################################call swi\n\r");
 		context_irq = 0;
 		asm("swi 1");
 	}
@@ -125,7 +124,7 @@ struct wait_queue task_queue;
 
 DECLARE_WAIT_QUEUE_STATIC(t2_wait);
 
-static volatile unsigned int cnt = 1;
+static unsigned int cnt = 1;
 
 DECLARE_TASK(t1, 512, 20)
 {
@@ -137,7 +136,6 @@ DECLARE_TASK(t1, 512, 20)
 
 		delay_ms(500);
 		printf("task id = %d\n\r", current->pid);
-		printf("*************************cnt = %d\n\r", cnt);
 	}
 }
 
@@ -146,7 +144,6 @@ DECLARE_TASK(t2, 512, 20)
 	while(1) {
 		delay_ms(500);
 		printf("task id = %d\n\r", current->pid);
-		printf("*************************cnt = %d\n\r", cnt);
 
 		wait_event(&t2_wait, (cnt < 5));
 	}
@@ -157,7 +154,6 @@ DECLARE_TASK(t3, 512, 20)
 	while(1) {
 		delay_ms(500);
 		printf("task id = %d\n\r", current->pid);
-		printf("*************************cnt = %d\n\r", cnt);
 
 		if(cnt >= 10) {
 			cnt = 0;
