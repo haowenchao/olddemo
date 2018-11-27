@@ -112,6 +112,7 @@ void scheduler(void)
 
 	current = to;
 
+	printf("##################################in scheduler calling context_switch\n\r");
 	context_switch(&(from->stack), &(to->stack));
 }
 

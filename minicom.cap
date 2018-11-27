@@ -1,0 +1,681 @@
+
+tick is set to 125ms
+
+*********** haowenchao boot menu ************
+[w] to write test data to nand flash
+[r] to read the data writen in nand flash
+[s] to read the status register of processer
+[p] to print current time
+[m] to set current time
+[c] to enter clock mode
+[e] to exit clock mode
+[a] to test rtc alarm
+[i] to enter the swi mode
+[z] to list all tasks
+enter your selection
+task id = 1
+this is task t4
+*************************cnt = 1
+task id = 1
+this is task t4
+*************************cnt = 1
+task id = 1
+this is task t4
+*************************cnt = 1
+task id = 1
+this is task t4
+*************************cnt = 1
+##################################in scheduler calling context_switch
+task id = 2
+this is task t3
+*************************cnt = 1
+task id = 2
+this is task t3
+*************************cnt = 1
+task id = 2
+this is task t3
+*************************cnt = 1
+task id = 2
+this is task t3
+*************************cnt = 1
+##################################in scheduler calling context_switch
+task id = 3
+this is task t2
+*************************cnt = 1
+task id = 3
+this is task t2
+*************************cnt = 1
+task id = 3
+this is task t2
+*************************cnt = 1
+task id = 3
+this is task t2
+*************************cnt = 1
+##################################in scheduler calling context_switch
+task id = 4
+this is task t1
+*************************cnt = 2
+task id = 4
+this is task t1
+*************************cnt = 3
+task id = 4
+this is task t1
+*************************cnt = 4
+task id = 4
+this is task t1
+*************************cnt = 5
+##################################in scheduler calling context_switch
+task id = 1
+this is task t4
+*************************cnt = 6
+task id = 1
+this is task t4
+*************************cnt = 6
+task id = 1
+this is task t4
+*************************cnt = 6
+task id = 1
+this is task t4
+*************************cnt = 6
+task id = 1
+this is task t4
+*************************cnt = 6
+##################################in scheduler calling context_switch
+task id = 2
+this is task t3
+*************************cnt = 6
+task id = 2
+this is task t3
+*************************cnt = 6
+task id = 2
+this is task t3
+*************************cnt = 6
+task id = 2
+this is task t3
+*************************cnt = 6
+task id = 2
+this is task t3
+*************************cnt = 6
+##################################in scheduler calling context_switch
+task id = 3
+this is task t2
+*************************cnt = 6
+###########################wait event
+##################################in scheduler calling context_switch
+##################################call swi
+
+swi enter, swi id = 1
+task id = 4
+this is task t1
+*************************cnt = 6
+task id = 4
+this is task t1
+*************************cnt = 7
+task id = 4
+this is task t1
+*************************cnt = 8
+task id = 4
+this is task t1
+*************************cnt = 9
+task id = 4
+this is task t1
+*************************cnt = 10
+##################################in scheduler calling context_switch
+task id = 1
+this is task t4
+*************************cnt = 11
+task id = 1
+this is task t4
+*************************cnt = 11
+task id = 1
+this is task t4
+*************************cnt = 11
+task id = 1
+this is task t4
+*************************cnt = 11
+##################################in scheduler calling context_switch
+task id = 2
+this is task t3
+*************************cnt = 11
+###########################wake up
+##################################in scheduler calling context_switch
+##################################call swi
+
+swi enter, swi id = 1
+task id = 4
+this is task t1
+*************************cnt = 0
+task id = 4
+this is task t1
+*************************cnt = 0
+task id = 4
+this is task t1
+*************************cnt = 0
+task id = 4
+this is task t1
+*************************cnt = 0
+##################################in scheduler calling context_switch
+task id = 3
+this is task t2
+*************************cnt = 0
+task id = 3
+this is task t2
+*************************cnt = 0
+task id = 3
+this is task t2
+*************************cnt = 0
+task id = 3
+this is task t2
+*************************cnt = 0
+##################################in scheduler calling context_switch
+task id = 1
+this is task t4
+*************************cnt = 0
+task id = 1
+this is task t4
+*************************cnt = 0
+task id = 1
+this is task t4
+*************************cnt = 0
+task id = 1
+this is task t4
+*************************cnt = 0
+init task t4
+init task t3
+init task t2
+init task t1
+
+tick is set to 125ms
+
+*********** haowenchao boot menu ************
+[w] to write test data to nand flash
+[r] to read the data writen in nand flash
+[s] to read the status register of processer
+[p] to print current time
+[m] to set current time
+[c] to enter clock mode
+[e] to exit clock mode
+[a] to test rtc alarm
+[i] to enter the swi mode
+[z] to list all tasks
+enter your selection
+task id = 1
+this is task t4
+*************************cnt = 1
+task id = 1
+this is task t4
+*************************cnt = 1
+task id = 1
+this is task t4
+*************************cnt = 1
+task id = 1
+this is task t4
+*************************cnt = 1
+##################################in scheduler calling context_switch
+task id = 2
+this is task t3
+*************************cnt = 1
+task id = 2
+this is task t3
+*************************cnt = 1
+task id = 2
+this is task t3
+*************************cnt = 1
+task id = 2
+this is task t3
+*************************cnt = 1
+##################################in scheduler calling context_switch
+task id = 3
+this is task t2
+*************************cnt = 1
+task id = 3
+this is task t2
+*************************cnt = 1
+task id = 3
+this is task t2
+*************************cnt = 1
+task id = 3
+this is task t2
+*************************cnt = 1
+##################################in scheduler calling context_switch
+task id = 4
+this is task t1
+*************************cnt = 2
+task id = 4
+this is task t1
+*************************cnt = 3
+task id = 4
+this is task t1
+*************************cnt = 4
+task id = 4
+this is task t1
+*************************cnt = 5
+##################################in scheduler calling context_switch
+task id = 1
+this is task t4
+*************************cnt = 6
+task id = 1
+this is task t4
+*************************cnt = 6
+task id = 1
+this is task t4
+*************************cnt = 6
+task id = 1
+this is task t4
+*************************cnt = 6
+task id = 1
+this is task t4
+*************************cnt = 6
+##################################in scheduler calling context_switch
+task id = 2
+this is task t3
+*************************cnt = 6
+task id = 2
+this is task t3
+*************************cnt = 6
+task id = 2
+this is task t3
+*************************cnt = 6
+task id = 2
+this is task t3
+*************************cnt = 6
+task id = 2
+this is task t3
+*************************cnt = 6
+##################################in scheduler calling context_switch
+task id = 3
+this is task t2
+*************************cnt = 6
+###########################wait event
+##################################in scheduler calling context_switch
+##################################call swi
+
+swi enter, swi id = 1
+task id = 4
+this is task t1
+*************************cnt = 6
+task id = 4
+this is task t1
+*************************cnt = 7
+task id = 4
+this is task t1
+*************************cnt = 8
+task id = 4
+this is task t1
+*************************cnt = 9
+task id = 4
+this is task t1
+*************************cnt = 10
+##################################in scheduler calling context_switch
+task id = 1
+this is task t4
+*************************cnt = 11
+task id = 1
+this is task t4
+*************************cnt = 11
+task id = 1
+this is task t4
+*************************cnt = 11
+task id = 1
+this is task t4
+*************************cnt = 11
+##################################in scheduler calling context_switch
+task id = 2
+this is task t3
+*************************cnt = 11
+task id = 2
+this is task t3
+*************************cnt = 11
+task id = 2
+this is task t3
+*************************cnt = 11
+task id = 2
+this is task t3
+*************************cnt = 11
+##################################in scheduler calling context_switch
+task id = 4
+this is task t1
+*************************cnt = 11
+task id = 4
+this is task t1
+*************************cnt = 12
+task id = 4
+this is task t1
+*************************cnt = 13
+task id = 4
+this is task t1
+*************************cnt = 14
+##################################in scheduler calling context_switch
+task id = 1
+this is task t4
+*************************cnt = 15
+task id = 1
+this is task t4
+*************************cnt = 15
+task id = 1
+this is task t4
+*************************cnt = 15
+task id = 1
+this is task t4
+*************************cnt = 15
+task id = 1
+this is task t4
+*************************cnt = 15
+##################################in scheduler calling context_switch
+task id = 2
+this is task t3
+*************************cnt = 15
+task id = 2
+this is task t3
+*************************cnt = 15
+task id = 2
+this is task t3
+*************************cnt = 15
+task id = 2
+this is task t3
+*************************cnt = 15
+task id = 2
+this is task t3
+*************************cnt = 15
+##################################in scheduler calling context_switch
+task id = 4
+this is task t1
+*************************cnt = 15
+task id = 4
+this is task t1
+*************************cnt = 16
+task id = 4
+this is task t1
+*************************cnt = 17
+task id = 4
+this is task t1
+*************************cnt = 18
+task id = 4
+this is task t1
+*************************cnt = 19
+##################################in scheduler calling context_switch
+task id = 1
+this is task t4
+*************************cnt = 20
+task id = 1
+this is task t4
+*************************cnt = 20
+task id = 1
+this is task t4
+*************************cnt = 20
+task id = 1
+this is task t4
+*************************cnt = 20
+##################################in scheduler calling context_switch
+task id = 2
+this is task t3
+*************************cnt = 20
+task id = 2
+this is task t3
+*************************cnt = 20
+task id = 2
+this is task t3
+*************************cnt = 20
+task id = 2
+this is task t3
+*************************cnt = 20
+##################################in scheduler calling context_switch
+task id = 4
+this is task t1
+*************************cnt = 20
+task id = 4
+this is task t1
+*************************cnt = 21
+task id = 4
+this is task t1
+*************************cnt = 22
+task id = 4
+this is task t1
+*************************cnt = 23
+##################################in scheduler calling context_switch
+task id = 1
+this is task t4
+*************************cnt = 24
+task id = 1
+this is task t4
+*************************cnt = 24
+task id = 1
+this is task t4
+*************************cnt = 24
+task id = 1
+this is task t4
+*************************cnt = 24
+task id = 1
+this is task t4
+*************************cnt = 24
+##################################in scheduler calling context_switch
+task id = 2
+this is task t3
+*************************cnt = 24
+task id = 2
+this is task t3
+*************************cnt = 24
+task id = 2
+this is task t3
+*************************cnt = 24
+task id = 2
+this is task t3
+*************************cnt = 24
+task id = 2
+this is task t3
+*************************cnt = 24
+##################################in scheduler calling context_switch
+task id = 4
+this is task t1
+*************************cnt = 24
+task id = 4
+this is task t1
+*************************cnt = 25
+task id = 4
+this is task t1
+*************************cnt = 26
+task id = 4
+this is task t1
+*************************cnt = 27
+task id = 4
+this is task t1
+*************************cnt = 28
+##################################in scheduler calling context_switch
+task id = 1
+this is task t4
+*************************cnt = 29
+task id = 1
+this is task t4
+*************************cnt = 29
+task id = 1
+this is task t4
+*************************cnt = 29
+task id = 1
+this is task t4
+*************************cnt = 29
+##################################in scheduler calling context_switch
+task id = 2
+this is task t3
+*************************cnt = 29
+task id = 2
+this is task t3
+*************************cnt = 29
+task id = 2
+this is task t3
+*************************cnt = 29
+task id = 2
+this is task t3
+*************************cnt = 29
+##################################in scheduler calling context_switch
+task id = 4
+this is task t1
+*************************cnt = 29
+task id = 4
+this is task t1
+*************************cnt = 30
+task id = 4
+this is task t1
+*************************cnt = 31
+task id = 4
+this is task t1
+*************************cnt = 32
+##################################in scheduler calling context_switch
+task id = 1
+this is task t4
+*************************cnt = 33
+task id = 1
+this is task t4
+*************************cnt = 33
+task id = 1
+this is task t4
+*************************cnt = 33
+task id = 1
+this is task t4
+*************************cnt = 33
+task id = 1
+this is task t4
+*************************cnt = 33
+##################################in scheduler calling context_switch
+task id = 2
+this is task t3
+*************************cnt = 33
+###########################wake up
+##################################in scheduler calling context_switch
+##################################call swi
+
+swi enter, swi id = 1
+task id = 4
+this is task t1
+*************************cnt = 0
+task id = 4
+this is task t1
+*************************cnt = 0
+task id = 4
+this is task t1
+*************************cnt = 0
+task id = 4
+this is task t1
+*************************cnt = 0
+task id = 4
+this is task t1
+*************************cnt = 0
+##################################in scheduler calling context_switch
+task id = 3
+this is task t2
+*************************cnt = 0
+task id = 3
+this is task t2
+*************************cnt = 0
+task id = 3
+this is task t2
+*************************cnt = 0
+task id = 3
+this is task t2
+*************************cnt = 0
+##################################in scheduler calling context_switch
+task id = 1
+this is task t4
+*************************cnt = 0
+task id = 1
+this is task t4
+*************************cnt = 0
+task id = 1
+this is task t4
+*************************cnt = 0
+task id = 1
+this is task t4
+*************************cnt = 0
+##################################in scheduler calling context_switch
+task id = 2
+this is task t3
+*************************cnt = 0
+task id = 2
+this is task t3
+*************************cnt = 0
+task id = 2
+this is task t3
+*************************cnt = 0
+task id = 2
+this is task t3
+*************************cnt = 0
+##################################in scheduler calling context_switch
+task id = 4
+this is task t1
+*************************cnt = 0
+task id = 4
+this is task t1
+*************************cnt = 0
+task id = 4
+this is task t1
+*************************cnt = 0
+task id = 4
+this is task t1
+*************************cnt = 0
+##################################in scheduler calling context_switch
+task id = 3
+this is task t2
+*************************cnt = 0
+task id = 3
+this is task t2
+*************************cnt = 0
+task id = 3
+this is task t2
+*************************cnt = 0
+task id = 3
+this is task t2
+*************************cnt = 0
+task id = 3
+this is task t2
+*************************cnt = 0
+##################################in scheduler calling context_switch
+task id = 1
+this is task t4
+*************************cnt = 0
+task id = 1
+this is task t4
+*************************cnt = 0
+task id = 1
+this is task t4
+*************************cnt = 0
+task id = 1
+this is task t4
+*************************cnt = 0
+task id = 1
+this is task t4
+*************************cnt = 0
+##################################in scheduler calling context_switch
+task id = 2
+this is task t3
+*************************cnt = 0
+task id = 2
+this is task t3
+*************************cnt = 0
+task id = 2
+this is task t3
+*************************cnt = 0
+task id = 2
+this is task t3
+*************************cnt = 0
+task id = 2
+this is task t3
+*************************cnt = 0
+##################################in scheduler calling context_switch
+task id = 4
+this is task t1
+*************************cnt = 0
+task id = 4
+this is task t1
+*************************cnt = 0
+task id = 4
+this is task t1
+*************************cnt = 0
+task id = 4
+this is task t1
+*************************cnt = 0
+task id = 4
+this is task t1
+*************************cnt = 0
+##################################in scheduler calling context_switch
+task id = 3
+this is task t2
+*************************cnt = 0

@@ -95,7 +95,7 @@ int main(void)
 	char t;
 	int id = 0;
 
-	printf("\n\rsystem starting\n\r");
+	printf("\n\rtick is set to 125ms\n\r");
 
 	while(1) {
 		printf("\n\r*********** haowenchao boot menu ************\n\r");
@@ -207,7 +207,7 @@ int main(void)
 
 		case 'u':
 			//set tick
-			rtc_enable_tick(31);
+			rtc_enable_tick(15);
 			request_irq(8, (void *)tick, (void *)0);
 
 			//start schedule
