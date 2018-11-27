@@ -162,7 +162,7 @@ DECLARE_TASK(t3, 512, 20)
 		printf("this is task t3\n\r");
 		printf("*************************cnt = %d\n\r", cnt);
 
-		if(cnt >= 30) {
+		if(cnt >= 10) {
 			cnt = 0;
 			wake_up(&t2_wait);
 		}
