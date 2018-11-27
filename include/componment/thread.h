@@ -5,6 +5,8 @@
 #include "componment/thread.h"
 #include "componment/init.h"
 
+int printf(const char *fmt, ...);
+
 typedef void (*task_t)(void *para);
 enum task_status {
 	TASK_READY   = 1,
@@ -58,6 +60,7 @@ void * stack_init(void *, unsigned int, task_t);
 	void func(void *p); \
 	static void init_##func(void) \
 	{ \
+		printf("init task %s\n\r", #func); \
 		task_init(&task_##func, func, stack_##func, ss, tick); \
 		task_start(&task_##func); \
 	} \
