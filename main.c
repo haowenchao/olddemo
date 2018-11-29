@@ -5,6 +5,7 @@
 #include "timer.h"
 #include "interrupt.h"
 #include "componment/scheduler.h"
+#include "componment/timer.h"
 
 static void write_nand(void)
 {
@@ -32,6 +33,23 @@ static void read_nand(void)
 	for(i = 0; i < 4096; i++) {
 		uart_putc(buff2[i]);
 	}
+}
+
+struct timer_struct t1;
+void time_out(struct timer_struct *t)
+{
+	printf("time out#########################\n\r");
+}
+
+struct timer_struct t2;
+void time_out2(struct timer_struct *t)
+{
+	printf("time out2#########################\n\r");
+}
+
+DEFINE_TIMER(timer3, timer3_func, 80)
+{
+	printf("what is you name? \n\r");
 }
 
 struct time_desc time;
@@ -97,6 +115,11 @@ int main(void)
 
 	printf("\n\rsystem starting\n\r");
 
+	timer_init(&t1, time_out, 20);
+	timer_init(&t2, time_out2, 40);
+	timer_add(&t1);
+	timer_add(&t2);
+
 	while(1) {
 		printf("\n\r*********** haowenchao boot menu ************\n\r");
 		printf("[w] to write test data to nand flash\n\r");
@@ -115,6 +138,11 @@ int main(void)
 
 		switch(t)
 		{
+		case '1':
+			rtc_enable_tick(15);
+			request_irq(8, (void *)sys_tick, (void *)0);
+		break;
+
 		case 'a':
 			rtc_enable_alarm(minen);
 			request_irq(INT_RTC, rtc_handler, (void *)0);
