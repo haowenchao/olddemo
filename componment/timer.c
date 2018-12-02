@@ -31,6 +31,7 @@ void sys_tick(void)
 			t->function(t);
 		}
 	}
+	tick();
 }
 
 /*
