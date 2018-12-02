@@ -35,13 +35,13 @@ static void read_nand(void)
 	}
 }
 
-struct timer_struct t1;
+struct timer_struct timer1;
 void time_out(struct timer_struct *t)
 {
 	printf("time out#########################\n\r");
 }
 
-struct timer_struct t2;
+struct timer_struct timer2;
 void time_out2(struct timer_struct *t)
 {
 	printf("time out2#########################\n\r");
@@ -115,10 +115,10 @@ int main(void)
 
 	printf("\n\rsystem starting\n\r");
 
-	timer_init(&t1, time_out, 20);
-	timer_init(&t2, time_out2, 40);
-	timer_add(&t1);
-	timer_add(&t2);
+	timer_init(&timer1, time_out, 20);
+	timer_init(&timer2, time_out2, 40);
+	timer_add(&timer1);
+	timer_add(&timer2);
 
 	while(1) {
 		printf("\n\r*********** haowenchao boot menu ************\n\r");
