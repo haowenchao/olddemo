@@ -1,4 +1,5 @@
 #include "componment/list.h"
+#include "componment/scheduler.h"
 #include "componment/init.h"
 #include "componment/timer.h"
 

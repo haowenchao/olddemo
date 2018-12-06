@@ -12,7 +12,8 @@ OBJDUMPFLAGS	:= -D -S
 export CC LD CFLAGS
 HOSTCXXFLAGS := -O2 $(HOST_LFS_CFLAGS)
 
-objs := start.o board.o s3c24xx.o context.o main.o timer.o nand.o swi.o interrupt.o exception.o rtc.o lib/lib.o componment/componment.o
+objs := start.o board.o s3c24xx.o context.o main.o timer.o nand.o swi.o interrupt.o exception.o rtc.o \
+	lib/lib.o componment/componment.o test/test.o
 
 pres := board.i s3c24xx.i main.i nand.i swi.i interrupt.i exception.i rtc.i
 
@@ -37,6 +38,9 @@ pre:$(pres)
 lib/lib.o:
 	make -C lib
 
+test/test.o:
+	make -C test
+
 componment/componment.o:
 	make -C componment
 
@@ -47,6 +51,7 @@ tags:
 clean:
 	rm -rf *.o *.bin *.elf *.dis *.i
 	make -C lib clean
+	make -C test clean
 	make -C componment clean
 
 install:
@@ -54,5 +59,6 @@ install:
 distclean:
 	rm -rf *.o *.bin *.elf *.dis cscope* tags *.i
 	make -C lib clean
+	make -C test clean
 	make -C componment clean
 
