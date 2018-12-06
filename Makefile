@@ -3,8 +3,8 @@ LD		:= arm-none-eabi-ld
 OBJDUMP		:= arm-none-eabi-objdump
 OBJCOPY		:= arm-none-eabi-objcopy
 READELF		:= arm-none-eabi-readelf
-CFLAGS		:= -c -nostdinc -fno-builtin -I$(shell pwd)/include -Wall \
-		-O2
+CFLAGS		:= -c -nostdinc -fno-builtin -I$(shell pwd)/include \
+		-I$(shell pwd)/lib -I$(shell pwd) -Wall -O2
 
 LDFLAGS		:= -Tlink.lds -nostdlib
 OBJCOPYFLAGS	:= -O binary -S
