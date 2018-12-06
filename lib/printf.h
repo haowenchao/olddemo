@@ -4,5 +4,6 @@
 
 int printf(const char *fmt, ...);
 int scanf(const char * fmt, ...);
+int terminal_scanf(const char * fmt, ...);
 
 #endif /* _PRINTF_H */

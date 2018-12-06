@@ -51,3 +51,32 @@ int scanf(const char* fmt, ...)
 
 	return i;
 }
+
+int terminal_scanf(const char* fmt, ...)
+{
+	unsigned char c;
+	int i = 0;
+	va_list args;
+
+	while (1)
+	{
+		c = getc();	
+		putc(c);
+		if ((c==0x0d) || (c==0x0a))
+		{
+			inbuf[i] = '\n';
+			break;
+		}
+		else
+		{
+			inbuf[i++] = c;	
+		}
+	}
+
+	va_start(args, fmt);
+	vsscanf((char *)inbuf,fmt,args);
+	va_end(args);
+
+	return i;
+}
+

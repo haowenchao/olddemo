@@ -14,7 +14,7 @@ int main(void)
 		printf("[r] to read the data writen in nand flash\n\r");
 		printf("enter your selection\n\r");
 
-		scanf("%c", &t);
+		terminal_scanf("%c", &t);
 
 		switch(t)
 		{
