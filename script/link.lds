@@ -6,10 +6,7 @@ SECTIONS
 	code_start = .;
 	.init	:
 	{
-		start.o(.text)
-		board.o(.text)
-		s3c24xx.o(.text)
-		nand.o(.text)
+		init/built-in.o(.text)
 	}
 	.text	:
 	{
