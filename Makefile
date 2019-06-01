@@ -1,74 +1,73 @@
-CC		:= arm-none-eabi-gcc
-LD		:= arm-none-eabi-ld
-OBJDUMP		:= arm-none-eabi-objdump
-OBJCOPY		:= arm-none-eabi-objcopy
-READELF		:= arm-none-eabi-readelf
-CFLAGS		:= -c -nostdinc -fno-builtin -I$(shell pwd)/include \
-		-I$(shell pwd)/lib -I$(shell pwd) -Wall -O2
-CFLAGS += -I$(shell pwd)/init
-CFLAGS += -I$(shell pwd)/board
+ifndef target
+  target = a.out
+endif
 
-LDFLAGS		:= -Tscript/link.lds -nostdlib
+CROSS_COMPILE := arm-none-eabi-
+CC      := $(CROSS_COMPILE)gcc
+LD      := $(CROSS_COMPILE)ld
+CPP     := $(CROSS_COMPILE)gcc
+AR      := $(CROSS_COMPILE)ar
+OBJDUMP := $(CROSS_COMPILE)objdump
+OBJCOPY := $(CROSS_COMPILE)objcopy
+export CC LD CPP AR OBJDUMP OBJCOPY
+
+CFLAGS := -c -nostdinc -fno-builtin -I$(shell pwd)/include \
+          -I$(shell pwd)/lib -I$(shell pwd)/board -Wall -O2 \
+          -I$(shell pwd)/init -I$(shell pwd)
+LDFLAGS		:= -T$(shell pwd)/script/link.lds -nostdlib
 OBJCOPYFLAGS	:= -O binary -S
 OBJDUMPFLAGS	:= -D -S
-export CC LD CFLAGS
-HOSTCXXFLAGS := -O2 $(HOST_LFS_CFLAGS)
+export CFLAGS LDFLAGS
 
-objs := init/built-in.o board/built-in.o lib/lib.o componment/componment.o test/test.o
+ifeq ("$(origin V)", "command line")
+  BUILD_VERBOSE = $(V)
+endif
 
-pres := board.i s3c24xx.i main.i nand.i swi.i interrupt.i exception.i rtc.i
+ifndef BUILD_VERBOSE
+  BUILD_VERBOSE = 0
+endif
 
-all:$(objs)
+ifeq ($(BUILD_VERBOSE),1)
+  quiet =
+  Q =
+else
+  quiet=quiet_
+  Q = @
+endif
+export BUILD_VERBOSE quiet Q
+
+MAKEFLAGS += --no-print-directory
+TOPDIR := $(shell pwd)
+SCRIPT := $(TOPDIR)/script
+build  := -f $(SCRIPT)/Makefile.build -C
+MAKE   := make
+export TOPDIR SCRIPT build MAKE
+
+PHONY    =
+subdir   := init/ board/ componment/ test/
+subdir-y := $(foreach v, $(filter %/, $(subdir)), $(patsubst %/, %/built-in.o, $v))
+subdir   := $(foreach v, $(filter %/, $(subdir)), $(patsubst %/, %, $(v)))
+
+all : $(subdir-y) lib/lib.o
 	$(LD) $(LDFLAGS) -o jz2440.elf $^
 	$(OBJCOPY) $(OBJCOPYFLAGS) jz2440.elf jz2440.bin
 	$(OBJDUMP) $(OBJDUMPFLAGS) jz2440.elf > jz2440.dis
-	rm -rf componment/*.o
 
-pre:$(pres)
-	make -C componment pre
+$(subdir-y) : $(subdir)
 
-init/built-in.o :
-	make -C init
+PHONY += $(subdir)
+$(subdir) :
+	$(Q) $(MAKE) $(build) $@
 
-board/built-in.o :
-	make -C board
-
-%.o:%.c
-	$(CC) $(CFLAGS) -o $@ $^
-
-%.o:%.S
-	$(CC) $(CFLAGS) -o $@ $^
-
-%.i:%.c
-	$(CC) $(CFLAGS) -E -o $@ $^
-
+PHONY += lib/lib.o
 lib/lib.o:
 	make -C lib
 
-test/test.o:
-	make -C test
-
-componment/componment.o:
-	make -C componment
-
-PHONY:tags
-tags:
-	ctags -R
-	cscope -Rbkq
+PHONY += clean
 clean:
-	rm -rf *.o *.bin *.elf *.dis *.i
-	make -C lib clean
-	make -C init clean
-	make -C test clean
-	make -C componment clean
+	rm -rf jz2440.*
+	find . -name "*.o"  | xargs rm -f
+	find . -name "*.a"  | xargs rm -f
 
-install:
-	sudo oflash 0 1 0 0 0 jz2440.bin
-
-distclean:
-	rm -rf *.o *.bin *.elf *.dis cscope* tags *.i
-	make -C init clean
-	make -C lib clean
-	make -C test clean
-	make -C componment clean
+.PHONY : $(PHONY)
 
